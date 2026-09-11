@@ -1,0 +1,899 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#FAFAFC;
+    --surface:#F1EEF8;
+    --surface-2:#E6E1F2;
+    --ink:#241C33;
+    --ink-soft:#6B6379;
+    --primary:#4E2E84;
+    --primary-dark:#382061;
+    --primary-tint:#EDE9F7;
+    --primary-light:#9384D6;
+    --accent:#F6A93C;
+    --accent-tint:#FDF0DC;
+    --danger:#B24A3E;
+    --danger-tint:#F6E4E0;
+    --border:#DFDAEC;
+    --bubble-me:#4E2E84;
+    --bubble-them:#EFEDF8;
+  }
+  *{box-sizing:border-box;}
+  #mhp-root{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    font-size:15px;
+    line-height:1.5;
+  }
+  #mhp-root h1,#mhp-root h2,#mhp-root h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0 0 6px 0;
+    letter-spacing:-0.01em;
+  }
+  #mhp-root .shell{max-width:1080px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;}
+  #mhp-root button{
+    font-family:'Inter',sans-serif;
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    padding:11px 18px;
+    font-size:14px;
+    font-weight:600;
+    transition:transform .08s ease, opacity .15s ease;
+  }
+  #mhp-root button:disabled{opacity:.55;cursor:default;}
+  #mhp-root button:active{transform:scale(0.97);}
+  #mhp-root .btn-primary{background:var(--primary);color:#fff;}
+  #mhp-root .btn-primary:hover{background:var(--primary-dark);}
+  #mhp-root .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--border);}
+  #mhp-root .btn-ghost:hover{background:var(--surface);}
+  #mhp-root .btn-danger{background:var(--danger);color:#fff;}
+  #mhp-root input, #mhp-root textarea{
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:11px 13px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:#fff;
+    width:100%;
+    color:var(--ink);
+  }
+  #mhp-root input:focus, #mhp-root textarea:focus{outline:2px solid var(--primary);outline-offset:1px;}
+  #mhp-root label{font-size:13px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:5px;}
+  #mhp-root .field{margin-bottom:14px;}
+  #mhp-root .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;}
+  #mhp-root .muted{color:var(--ink-soft);font-size:13.5px;}
+  #mhp-root a.linklike{color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;}
+  #mhp-root .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;}
+  #mhp-root .pill-open{background:var(--danger-tint);color:var(--danger);}
+  #mhp-root .pill-resolved{background:var(--primary-tint);color:var(--primary-dark);}
+  #mhp-root .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;border-bottom:1px solid var(--border);background:#fff;
+  }
+  #mhp-root .topbar .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;}
+  #mhp-root .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+  #mhp-root .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);background:#fff;padding:0 24px;}
+  #mhp-root .tab{padding:14px 6px;margin-right:22px;font-weight:600;font-size:14px;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;}
+  #mhp-root .tab.active{color:var(--primary-dark);border-bottom-color:var(--primary);}
+  #mhp-root .content{flex:1;padding:26px 24px;display:flex;flex-direction:column;}
+  #mhp-root .centerbox{max-width:420px;margin:48px auto;width:100%;}
+  #mhp-root .msg-row{display:flex;margin-bottom:9px;}
+  #mhp-root .msg-row.me{justify-content:flex-end;}
+  #mhp-root .bubble{max-width:70%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.42;}
+  #mhp-root .bubble.me{background:var(--bubble-me);color:#fff;border-bottom-right-radius:4px;}
+  #mhp-root .bubble.them{background:var(--bubble-them);color:var(--ink);border-bottom-left-radius:4px;}
+  #mhp-root .bubble .ts{display:block;font-size:10.5px;margin-top:4px;opacity:.65;}
+  #mhp-root .chat-panel{display:flex;flex-direction:column;height:60vh;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
+  #mhp-root .chat-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);}
+  #mhp-root .chat-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;}
+  #mhp-root .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);}
+  #mhp-root .chat-input input{flex:1;}
+  #mhp-root .mentee-item{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;background:#fff;}
+  #mhp-root .mentee-item:hover{border-color:var(--primary);}
+  #mhp-root .mentee-item.active{border-color:var(--primary);background:var(--primary-tint);}
+  #mhp-root table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  #mhp-root th{text-align:left;color:var(--ink-soft);font-weight:600;padding:9px 10px;border-bottom:1px solid var(--border);font-size:12.5px;text-transform:none;}
+  #mhp-root td{padding:10px 10px;border-bottom:1px solid var(--surface-2);}
+  #mhp-root .role-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:760px;margin:40px auto;}
+  #mhp-root .role-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 20px;text-align:left;cursor:pointer;transition:border-color .15s;}
+  #mhp-root .role-card:hover{border-color:var(--primary);}
+  #mhp-root .empty{padding:40px 20px;text-align:center;color:var(--ink-soft);}
+  #mhp-root .hint{background:var(--primary-tint);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:12.5px;color:var(--primary-dark);margin-bottom:16px;}
+  #mhp-root .anon-badge{font-family:'Fraunces',serif;font-weight:600;font-size:16px;}
+  #mhp-root .spinner{width:22px;height:22px;border-radius:50%;border:3px solid var(--surface-2);border-top-color:var(--primary);animation:mhpspin .7s linear infinite;margin:0 auto;}
+  @keyframes mhpspin{to{transform:rotate(360deg);}}
+  @media (max-width:640px){
+    #mhp-root .role-grid{grid-template-columns:1fr;}
+    #mhp-root .bubble{max-width:85%;}
+  }
+</style>
+
+<div id="mhp-root"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where,
+  onSnapshot, orderBy, serverTimestamp, runTransaction
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ---------- Firebase project config ----------
+const firebaseConfig = {
+  apiKey: "AIzaSyDh51WWyzKgmm_QZ7bfGRWp2O-ikynUG-I",
+  authDomain: "mhmp-peer-mentorship.firebaseapp.com",
+  projectId: "mhmp-peer-mentorship",
+  storageBucket: "mhmp-peer-mentorship.firebasestorage.app",
+  messagingSenderId: "563222352182",
+  appId: "1:563222352182:web:2b49c401c1c02d6fd06397"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const fs = getFirestore(fbApp);
+
+// Fake-email domains used so students/mentors can "log in with a name" via Firebase Auth
+const STUDENT_DOMAIN = "students.mhmp-peer-mentorship.local";
+const MENTOR_DOMAIN  = "mentors.mhmp-peer-mentorship.local";
+// The one admin account, created manually in the Firebase console (see setup notes).
+const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
+
+(function(){
+  const root = document.getElementById('mhp-root');
+
+  let S = { view:'boot', role:null, uid:null, profile:null, tab:'chat', adminTab:'users',
+            activeMenteeUid:null, adminActiveMentor:null, adminActiveMentee:null, issueCategory:null,
+            authBusy:false };
+
+  let liveUnsubs = [];
+  function clearLiveListeners(){ liveUnsubs.forEach(u => { try{u();}catch(e){} }); liveUnsubs = []; }
+  function track(unsub){ liveUnsubs.push(unsub); }
+
+  function esc(s){
+    return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function fmtTime(ts){
+    if(!ts) return '';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + ' · ' + d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+  }
+  function pairKey(studentUid, mentorUid){ return studentUid + '_' + mentorUid; }
+
+  function studentEmail(id){ return id.toLowerCase() + '@' + STUDENT_DOMAIN; }
+  function mentorEmail(slug){ return slug + '@' + MENTOR_DOMAIN; }
+  function slugify(name){ return name.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'mentor'; }
+
+  // ---------- generic error helper ----------
+  function friendlyAuthError(e){
+    const code = e && e.code || '';
+    if(code.includes('email-already-in-use')) return 'That account already exists — try logging in instead.';
+    if(code.includes('wrong-password') || code.includes('invalid-credential')) return 'Incorrect ID/name or password.';
+    if(code.includes('user-not-found')) return 'No account found — check your details or sign up.';
+    if(code.includes('weak-password')) return 'Password must be at least 6 characters.';
+    if(code.includes('too-many-requests')) return 'Too many attempts — please wait a moment and try again.';
+    return e && e.message ? e.message : 'Something went wrong. Please try again.';
+  }
+
+  // ---------- transactional counters doc: mentor round robin + used anon names ----------
+  async function signupCounters(){
+    const ref = doc(fs, 'meta', 'counters');
+    return await runTransaction(fs, async (tx) => {
+      const snap = await tx.get(ref);
+      const data = snap.exists() ? snap.data() : { mentorOrder:[], nextIdx:0, usedNames:[] };
+      const used = new Set(data.usedNames || []);
+      let name;
+      do { name = 'Anonymous' + String(Math.floor(1000 + Math.random()*9000)); } while (used.has(name));
+      let mentorUid = null;
+      const order = data.mentorOrder || [];
+      let nextIdx = data.nextIdx || 0;
+      if(order.length > 0){
+        mentorUid = order[nextIdx % order.length];
+        nextIdx = nextIdx + 1;
+      }
+      tx.set(ref, { mentorOrder: order, nextIdx, usedNames: [...used, name] });
+      return { anonName: name, mentorUid };
+    });
+  }
+
+  async function registerMentorInOrder(uid){
+    const ref = doc(fs, 'meta', 'counters');
+    await runTransaction(fs, async (tx) => {
+      const snap = await tx.get(ref);
+      const data = snap.exists() ? snap.data() : { mentorOrder:[], nextIdx:0, usedNames:[] };
+      const order = data.mentorOrder || [];
+      if(!order.includes(uid)) order.push(uid);
+      tx.set(ref, { mentorOrder: order, nextIdx: data.nextIdx || 0, usedNames: data.usedNames || [] });
+    });
+  }
+
+  // ---------- render dispatch ----------
+  function render(){
+    clearLiveListeners();
+    if(S.view==='boot') return renderBoot();
+    if(S.view==='landing') return renderLanding();
+    if(S.view==='studentSignup') return renderStudentSignup();
+    if(S.view==='studentLogin') return renderStudentLogin();
+    if(S.view==='studentInfo') return renderStudentInfo();
+    if(S.view==='studentMain') return renderStudentMain();
+    if(S.view==='mentorAuth') return renderMentorAuth();
+    if(S.view==='mentorHome') return renderMentorHome();
+    if(S.view==='adminAuth') return renderAdminAuth();
+    if(S.view==='adminHome') return renderAdminHome();
+    renderLanding();
+  }
+
+  function topbar(title, onBack){
+    return `<div class="topbar">
+      <div class="brand"><span class="dot"></span> ${esc(title)}</div>
+      ${onBack ? `<button class="btn-ghost" onclick="${onBack}">Log out</button>` : ''}
+    </div>`;
+  }
+  function brandMark(){
+    return `<div style="display:flex;align-items:center;gap:2px;font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1;">
+      <span style="color:var(--primary);">M</span>
+      <span style="position:relative;color:var(--primary-light);">H<span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--accent);"></span></span>
+      <span style="color:var(--primary);">MP</span>
+    </div>`;
+  }
+
+  function renderBoot(){
+    root.innerHTML = `<div class="shell"><div class="content" style="justify-content:center;align-items:center;"><div class="spinner"></div></div></div>`;
+  }
+
+  // ---------- LANDING ----------
+  function renderLanding(){
+    root.innerHTML = `
+      <div class="shell">
+        <div class="topbar">${brandMark()}</div>
+        <div class="content">
+          <div style="max-width:640px;margin:36px auto 0;text-align:center;">
+            <div style="display:flex;justify-content:center;margin-bottom:18px;">${brandMark()}</div>
+            <p class="muted" style="letter-spacing:.02em;margin-bottom:2px;">Mental Health Mentorship Program</p>
+            <h1 style="font-size:30px;">A quiet, anonymous space to talk to someone who'll listen</h1>
+            <p class="muted" style="font-size:15px;">Every student in the program is matched with a trained peer mentor. No names, no judgment — just support. Choose how you're joining today.</p>
+          </div>
+          <div class="role-grid">
+            <div class="role-card" onclick="MHP.go('studentLogin')">
+              <h3>I'm a student</h3>
+              <p class="muted">Sign in or sign up with your school ID to chat with your mentor.</p>
+            </div>
+            <div class="role-card" onclick="MHP.go('mentorAuth')">
+              <h3>I'm a mentor</h3>
+              <p class="muted">Sign in to see your mentees and continue conversations.</p>
+            </div>
+            <div class="role-card" onclick="MHP.go('adminAuth')">
+              <h3>Program management</h3>
+              <p class="muted">Sign in to oversee sign-ups, chats, and submitted issues.</p>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // ---------- STUDENT SIGNUP ----------
+  function renderStudentSignup(){
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar('Student sign up')}
+        <div class="content">
+          <div class="centerbox card">
+            <h2>Create your account</h2>
+            <p class="muted" style="margin-bottom:18px;">Use the school ID code you were given. You'll be assigned an anonymous name automatically — your mentor will never see your real identity.</p>
+            <div id="su-error" class="hint" style="display:none;background:var(--danger-tint);color:var(--danger);"></div>
+            <div class="field"><label>School ID code</label><input id="su-id" placeholder="e.g. S1001" autocomplete="off"/></div>
+            <div class="field"><label>Create a password</label><input id="su-pw" type="password" placeholder="At least 6 characters" onkeydown="if(event.key==='Enter')MHP.doStudentSignup()"/></div>
+            <button class="btn-primary" style="width:100%;" id="su-btn" onclick="MHP.doStudentSignup()">Create account</button>
+            <p class="muted" style="margin-top:14px;">Already signed up? <a class="linklike" onclick="MHP.go('studentLogin')">Log in</a></p>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  window.MHP = window.MHP || {};
+
+  MHP.doStudentSignup = async function(){
+    const idRaw = document.getElementById('su-id').value.trim();
+    const id = idRaw.toUpperCase();
+    const pw = document.getElementById('su-pw').value;
+    const err = document.getElementById('su-error');
+    const btn = document.getElementById('su-btn');
+    err.style.display='none';
+    if(!id || !pw || pw.length < 6){
+      err.style.display='block'; err.textContent='Enter your school ID and a password of at least 6 characters.'; return;
+    }
+    btn.disabled = true; btn.textContent = 'Checking…';
+    try{
+      const wl = await getDoc(doc(fs,'meta','whitelist'));
+      const ids = wl.exists() ? (wl.data().ids || []) : [];
+      if(!ids.map(x=>String(x).toUpperCase()).includes(id)){
+        err.style.display='block'; err.textContent="That school ID isn't on the approved list. Check with your program coordinator.";
+        btn.disabled=false; btn.textContent='Create account'; return;
+      }
+      btn.textContent = 'Creating account…';
+      const cred = await createUserWithEmailAndPassword(auth, studentEmail(id), pw);
+      const { anonName, mentorUid } = await signupCounters();
+      await setDoc(doc(fs,'students',cred.user.uid), {
+        schoolId: id, anonName, mentorId: mentorUid, createdAt: serverTimestamp()
+      });
+      S.role='student'; S.uid=cred.user.uid; S.profile={ schoolId:id, anonName, mentorId:mentorUid };
+      S.view='studentInfo';
+      render();
+    }catch(e){
+      err.style.display='block'; err.textContent = friendlyAuthError(e);
+      btn.disabled=false; btn.textContent='Create account';
+    }
+  };
+
+  // ---------- STUDENT LOGIN ----------
+  function renderStudentLogin(){
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar('Student log in')}
+        <div class="content">
+          <div class="centerbox card">
+            <h2>Welcome back</h2>
+            <div id="li-error" class="hint" style="display:none;background:var(--danger-tint);color:var(--danger);"></div>
+            <div class="field"><label>School ID code</label><input id="li-id" placeholder="e.g. S1001"/></div>
+            <div class="field"><label>Password</label><input id="li-pw" type="password" onkeydown="if(event.key==='Enter')MHP.doStudentLogin()"/></div>
+            <button class="btn-primary" style="width:100%;" id="li-btn" onclick="MHP.doStudentLogin()">Log in</button>
+            <p class="muted" style="margin-top:14px;">New here? <a class="linklike" onclick="MHP.go('studentSignup')">Create an account</a></p>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  MHP.doStudentLogin = async function(){
+    const id = document.getElementById('li-id').value.trim().toUpperCase();
+    const pw = document.getElementById('li-pw').value;
+    const err = document.getElementById('li-error');
+    const btn = document.getElementById('li-btn');
+    err.style.display='none';
+    if(!id || !pw){ err.style.display='block'; err.textContent='Enter your school ID and password.'; return; }
+    btn.disabled=true; btn.textContent='Logging in…';
+    try{
+      const cred = await signInWithEmailAndPassword(auth, studentEmail(id), pw);
+      let snap = await getDoc(doc(fs,'students',cred.user.uid));
+      if(!snap.exists()){
+        // Recover from an interrupted signup (auth account created, profile step never finished).
+        const { anonName, mentorUid } = await signupCounters();
+        await setDoc(doc(fs,'students',cred.user.uid), { schoolId:id, anonName, mentorId:mentorUid, createdAt: serverTimestamp() });
+        snap = await getDoc(doc(fs,'students',cred.user.uid));
+      }
+      S.role='student'; S.uid=cred.user.uid; S.profile=snap.data();
+      S.view='studentMain'; S.tab='chat';
+      render();
+    }catch(e){
+      err.style.display='block'; err.textContent = friendlyAuthError(e);
+      btn.disabled=false; btn.textContent='Log in';
+    }
+  };
+
+  // ---------- STUDENT INFO ----------
+  function renderStudentInfo(){
+    const p = S.profile;
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar("You're in")}
+        <div class="content">
+          <div class="centerbox card" style="text-align:center;">
+            <h2>Welcome, <span class="anon-badge">${esc(p.anonName)}</span></h2>
+            <p class="muted" style="margin:14px 0 20px;">This is your identity in the program — nobody, including your mentor, sees your real name or school ID here. You've been matched with a mentor and can start chatting whenever you're ready. There's also a page to report any issue directly to program management, always anonymously.</p>
+            <button class="btn-primary" style="width:100%;" onclick="S.view='studentMain'; S.tab='chat'; render();">Go to my chat</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // ---------- STUDENT MAIN ----------
+  function renderStudentMain(){
+    const p = S.profile;
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar(p.anonName, 'MHP.logout()')}
+        <div class="tabs">
+          <div class="tab ${S.tab==='chat'?'active':''}" onclick="MHP.setTab('chat')">Chat with my mentor</div>
+          <div class="tab ${S.tab==='issue'?'active':''}" onclick="MHP.setTab('issue')">Report an issue</div>
+        </div>
+        <div class="content" id="student-tab-content"></div>
+      </div>`;
+    if(S.tab==='chat') renderStudentChatTab(p);
+    else renderStudentIssueTab(p);
+  }
+
+  function renderStudentChatTab(p){
+    const c = document.getElementById('student-tab-content');
+    if(!p.mentorId){
+      c.innerHTML = `<div class="empty card">
+        <h3>Finding you a mentor…</h3>
+        <p class="muted">No mentors are registered yet. Check back shortly, or try again now.</p>
+        <div style="margin-top:14px;"><button class="btn-primary" onclick="MHP.retryAssign()">Try again</button></div>
+      </div>`;
+      return;
+    }
+    c.innerHTML = `
+      <div class="chat-panel">
+        <div class="chat-header"><div><strong>Your mentor</strong><div class="muted">Anonymous, one-to-one</div></div></div>
+        <div class="chat-body" id="chat-body"><div class="empty">Loading…</div></div>
+        <div class="chat-input">
+          <input id="student-msg-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')MHP.sendStudentMsg()"/>
+          <button class="btn-primary" onclick="MHP.sendStudentMsg()">Send</button>
+        </div>
+      </div>`;
+    const key = pairKey(S.uid, p.mentorId);
+    const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
+    const unsub = onSnapshot(q, (qs) => {
+      const body = document.getElementById('chat-body');
+      if(!body) return;
+      if(qs.empty){ body.innerHTML = '<div class="empty">No messages yet — say hello whenever you\'re ready.</div>'; return; }
+      body.innerHTML = qs.docs.map(d => {
+        const m = d.data();
+        return `<div class="msg-row ${m.from==='student'?'me':''}">
+          <div class="bubble ${m.from==='student'?'me':'them'}">${esc(m.text)}<span class="ts">${fmtTime(m.ts)}</span></div>
+        </div>`;
+      }).join('');
+      body.scrollTop = body.scrollHeight;
+    }, (e) => {
+      const body = document.getElementById('chat-body');
+      if(body) body.innerHTML = `<div class="empty">Couldn't load messages (${esc(e.message)}).</div>`;
+    });
+    track(unsub);
+  }
+
+  MHP.retryAssign = async function(){
+    const { anonName, mentorUid } = await signupCounters().then(r => ({anonName:S.profile.anonName, mentorUid:r.mentorUid}));
+    if(mentorUid){
+      await updateDoc(doc(fs,'students',S.uid), { mentorId: mentorUid });
+      S.profile.mentorId = mentorUid;
+    }
+    render();
+  };
+
+  MHP.sendStudentMsg = async function(){
+    const input = document.getElementById('student-msg-input');
+    const text = input.value.trim();
+    if(!text || !S.profile.mentorId) return;
+    input.value='';
+    const key = pairKey(S.uid, S.profile.mentorId);
+    try{
+      await addDoc(collection(fs,'messages',key,'thread'), { from:'student', text, ts: serverTimestamp() });
+    }catch(e){ alert('Message failed to send: ' + e.message); }
+  };
+
+  const ISSUE_CATEGORIES = [
+    { key:'technical', label:'Technical issue', hint:"The app isn't working the way it should." },
+    { key:'mentor', label:'Mentor complaint', hint:'A concern about how your mentor has treated you.' },
+    { key:'other', label:'Other', hint:'Anything else you want management to know.' }
+  ];
+  function categoryLabel(key){ const c = ISSUE_CATEGORIES.find(c=>c.key===key); return c ? c.label : 'Other'; }
+
+  function renderStudentIssueTab(p){
+    const c = document.getElementById('student-tab-content');
+    c.innerHTML = `
+      <div class="card" style="max-width:640px;">
+        <h3>Report an issue to management</h3>
+        <p class="muted">This goes directly to program management, not your mentor — still fully anonymous on their end, shown only as ${esc(p.anonName)}. If you're in crisis or unsafe right now, please also reach out to a trusted adult or local emergency services immediately.</p>
+        <div class="field" style="margin-top:16px;">
+          <label>What's this about?</label>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${ISSUE_CATEGORIES.map(cat => `
+              <div onclick="MHP.selectIssueCategory('${cat.key}')" style="cursor:pointer;padding:12px 14px;border-radius:10px;border:1px solid ${S.issueCategory===cat.key?'var(--primary)':'var(--border)'};background:${S.issueCategory===cat.key?'var(--primary-tint)':'#fff'};">
+                <div style="font-weight:600;font-size:14px;color:${S.issueCategory===cat.key?'var(--primary-dark)':'var(--ink)'};">${cat.label}</div>
+                <div class="muted" style="font-size:12.5px;">${cat.hint}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="field"><label>Details ${S.issueCategory==='other' ? '' : '(optional)'}</label><textarea id="issue-text" rows="3" placeholder="Add any details that would help management understand…"></textarea></div>
+        <button class="btn-primary" onclick="MHP.submitIssue()">Submit</button>
+      </div>
+      <div style="max-width:640px;margin-top:22px;">
+        <h3 style="font-size:15px;">Your previous reports</h3>
+        <div id="my-issues"><p class="muted">Loading…</p></div>
+      </div>`;
+    const q = query(collection(fs,'issues'), where('studentUid','==',S.uid));
+    const unsub = onSnapshot(q, (qs) => {
+      const el = document.getElementById('my-issues');
+      if(!el) return;
+      if(qs.empty){ el.innerHTML = '<p class="muted">None yet.</p>'; return; }
+      const items = qs.docs.map(d=>d.data()).sort((a,b)=> (b.ts?.toMillis?.()||0) - (a.ts?.toMillis?.()||0));
+      el.innerHTML = items.map(i => `
+        <div class="card" style="margin-bottom:10px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-weight:600;font-size:13.5px;color:var(--primary-dark);">${esc(categoryLabel(i.category))}</span>
+            <span class="pill ${i.status==='open'?'pill-open':'pill-resolved'}">${i.status}</span>
+          </div>
+          ${i.text ? `<div class="muted">${esc(i.text)}</div>` : ''}
+          <div class="muted" style="margin-top:6px;">${fmtTime(i.ts)}</div>
+        </div>`).join('');
+    });
+    track(unsub);
+  }
+
+  MHP.selectIssueCategory = function(key){ S.issueCategory = key; renderStudentIssueTab(S.profile); };
+
+  MHP.submitIssue = async function(){
+    const ta = document.getElementById('issue-text');
+    const text = ta.value.trim();
+    if(!S.issueCategory){ alert('Choose what this is about first.'); return; }
+    if(S.issueCategory==='other' && !text){ alert('Add a few details so management knows what you mean.'); return; }
+    try{
+      await addDoc(collection(fs,'issues'), {
+        studentUid: S.uid, anonName: S.profile.anonName, category: S.issueCategory, text, ts: serverTimestamp(), status:'open'
+      });
+      S.issueCategory = null;
+      renderStudentIssueTab(S.profile);
+    }catch(e){ alert('Could not submit: ' + e.message); }
+  };
+
+  // ---------- MENTOR AUTH ----------
+  function renderMentorAuth(){
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar('Mentor access')}
+        <div class="content">
+          <div class="centerbox card">
+            <h2>Mentor sign in</h2>
+            <p class="muted" style="margin-bottom:14px;">First time here? Enter a display name and create a password to register — your coordinator can verify mentors separately.</p>
+            <div id="mt-error" class="hint" style="display:none;background:var(--danger-tint);color:var(--danger);"></div>
+            <div class="field"><label>Your name</label><input id="mt-name" placeholder="e.g. Sarah K."/></div>
+            <div class="field"><label>Password</label><input id="mt-pw" type="password" onkeydown="if(event.key==='Enter')MHP.mentorAuth('login')"/></div>
+            <div style="display:flex;gap:10px;">
+              <button class="btn-primary" style="flex:1;" id="mt-login-btn" onclick="MHP.mentorAuth('login')">Log in</button>
+              <button class="btn-ghost" style="flex:1;" id="mt-signup-btn" onclick="MHP.mentorAuth('signup')">Register</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  MHP.mentorAuth = async function(mode){
+    const name = document.getElementById('mt-name').value.trim();
+    const pw = document.getElementById('mt-pw').value;
+    const err = document.getElementById('mt-error');
+    err.style.display='none';
+    if(!name || !pw){ err.style.display='block'; err.textContent='Enter a name and password.'; return; }
+    const slug = slugify(name);
+    try{
+      let cred;
+      if(mode==='signup'){
+        cred = await createUserWithEmailAndPassword(auth, mentorEmail(slug), pw);
+        await setDoc(doc(fs,'mentors',cred.user.uid), { name, createdAt: serverTimestamp() });
+        await registerMentorInOrder(cred.user.uid);
+      } else {
+        cred = await signInWithEmailAndPassword(auth, mentorEmail(slug), pw);
+      }
+      const snap = await getDoc(doc(fs,'mentors',cred.user.uid));
+      S.role='mentor'; S.uid=cred.user.uid; S.profile = snap.exists() ? snap.data() : { name };
+      S.view='mentorHome'; S.tab='mentees'; S.activeMenteeUid=null;
+      render();
+    }catch(e){
+      err.style.display='block'; err.textContent = friendlyAuthError(e);
+    }
+  };
+
+  // ---------- MENTOR HOME ----------
+  function renderMentorHome(){
+    const m = S.profile;
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar(m.name, 'MHP.logout()')}
+        <div class="tabs">
+          <div class="tab ${S.tab==='mentees'?'active':''}" onclick="MHP.setTab('mentees')">My mentees</div>
+          <div class="tab ${S.tab==='chats'?'active':''}" onclick="MHP.setTab('chats')">Active chats</div>
+        </div>
+        <div class="content" id="mentor-tab-content"><div class="empty">Loading…</div></div>
+      </div>`;
+    const q = query(collection(fs,'students'), where('mentorId','==',S.uid));
+    const unsub = onSnapshot(q, (qs) => {
+      const mentees = qs.docs.map(d => ({ uid:d.id, ...d.data() }));
+      if(S.tab==='mentees') renderMentorMenteesTab(mentees);
+      else renderMentorChatsTab(mentees);
+    }, (e) => {
+      const c = document.getElementById('mentor-tab-content');
+      if(c) c.innerHTML = `<div class="empty">Couldn't load mentees (${esc(e.message)}).</div>`;
+    });
+    track(unsub);
+  }
+
+  function renderMentorMenteesTab(mentees){
+    const c = document.getElementById('mentor-tab-content');
+    if(!c) return;
+    c.innerHTML = mentees.length===0
+      ? '<div class="empty card">No mentees assigned yet.</div>'
+      : `<div style="max-width:520px;">${mentees.map(u => `
+          <div class="mentee-item">
+            <span class="anon-badge">${esc(u.anonName)}</span>
+            <button class="btn-ghost" onclick="MHP.openMenteeChat('${u.uid}')">Open chat</button>
+          </div>`).join('')}</div>`;
+  }
+
+  MHP.openMenteeChat = function(uid){ S.tab='chats'; S.activeMenteeUid = uid; render(); };
+
+  function renderMentorChatsTab(mentees){
+    const c = document.getElementById('mentor-tab-content');
+    if(!c) return;
+    if(!S.activeMenteeUid && mentees.length>0) S.activeMenteeUid = mentees[0].uid;
+    c.innerHTML = `
+      <div style="display:flex;gap:18px;">
+        <div style="width:220px;flex-shrink:0;">
+          ${mentees.length===0 ? '<p class="muted">No mentees yet.</p>' : mentees.map(u => `
+            <div class="mentee-item ${u.uid===S.activeMenteeUid?'active':''}" onclick="MHP.openMenteeChat('${u.uid}')" style="display:block;">
+              <span class="anon-badge" style="font-size:14px;">${esc(u.anonName)}</span>
+            </div>`).join('')}
+        </div>
+        <div style="flex:1;" id="mentor-chat-panel"></div>
+      </div>`;
+    const active = mentees.find(u=>u.uid===S.activeMenteeUid);
+    renderMentorChatPanel(active);
+  }
+
+  function renderMentorChatPanel(u){
+    const panel = document.getElementById('mentor-chat-panel');
+    if(!panel) return;
+    if(!u){ panel.innerHTML = '<div class="empty card">Select a mentee to view the conversation.</div>'; return; }
+    panel.innerHTML = `
+      <div class="chat-panel">
+        <div class="chat-header"><strong class="anon-badge" style="font-size:15px;">${esc(u.anonName)}</strong></div>
+        <div class="chat-body" id="mentor-chat-body"><div class="empty">Loading…</div></div>
+        <div class="chat-input">
+          <input id="mentor-msg-input" placeholder="Reply…" onkeydown="if(event.key==='Enter')MHP.sendMentorMsg('${u.uid}')"/>
+          <button class="btn-primary" onclick="MHP.sendMentorMsg('${u.uid}')">Send</button>
+        </div>
+      </div>`;
+    const key = pairKey(u.uid, S.uid);
+    const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
+    const unsub = onSnapshot(q, (qs) => {
+      const body = document.getElementById('mentor-chat-body');
+      if(!body) return;
+      if(qs.empty){ body.innerHTML = '<div class="empty">No messages yet.</div>'; return; }
+      body.innerHTML = qs.docs.map(d => {
+        const m = d.data();
+        return `<div class="msg-row ${m.from==='mentor'?'me':''}">
+          <div class="bubble ${m.from==='mentor'?'me':'them'}">${esc(m.text)}<span class="ts">${fmtTime(m.ts)}</span></div>
+        </div>`;
+      }).join('');
+      body.scrollTop = body.scrollHeight;
+    });
+    track(unsub);
+  }
+
+  MHP.sendMentorMsg = async function(menteeUid){
+    const input = document.getElementById('mentor-msg-input');
+    const text = input.value.trim();
+    if(!text) return;
+    input.value='';
+    const key = pairKey(menteeUid, S.uid);
+    try{
+      await addDoc(collection(fs,'messages',key,'thread'), { from:'mentor', text, ts: serverTimestamp() });
+    }catch(e){ alert('Message failed to send: ' + e.message); }
+  };
+
+  // ---------- ADMIN AUTH ----------
+  function renderAdminAuth(){
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar('Management access')}
+        <div class="content">
+          <div class="centerbox card">
+            <h2>Sign in</h2>
+            <div id="ad-error" class="hint" style="display:none;background:var(--danger-tint);color:var(--danger);"></div>
+            <div class="field"><label>Email</label><input id="ad-user" placeholder="admin@..." onkeydown="if(event.key==='Enter')MHP.doAdminLogin()"/></div>
+            <div class="field"><label>Password</label><input id="ad-pw" type="password" onkeydown="if(event.key==='Enter')MHP.doAdminLogin()"/></div>
+            <button class="btn-primary" style="width:100%;" onclick="MHP.doAdminLogin()">Log in</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  MHP.doAdminLogin = async function(){
+    const user = document.getElementById('ad-user').value.trim();
+    const pw = document.getElementById('ad-pw').value;
+    const err = document.getElementById('ad-error');
+    err.style.display='none';
+    if(!user || !pw){ err.style.display='block'; err.textContent='Enter both fields.'; return; }
+    try{
+      const cred = await signInWithEmailAndPassword(auth, user, pw);
+      if(cred.user.email !== ADMIN_EMAIL){
+        await signOut(auth);
+        err.style.display='block'; err.textContent='This account is not authorized for management access.'; return;
+      }
+      S.role='admin'; S.uid=cred.user.uid; S.profile={ email:cred.user.email };
+      S.view='adminHome'; S.adminTab='users';
+      render();
+    }catch(e){
+      err.style.display='block'; err.textContent = friendlyAuthError(e);
+    }
+  };
+
+  // ---------- ADMIN HOME ----------
+  function renderAdminHome(){
+    root.innerHTML = `
+      <div class="shell">
+        ${topbar('Program management', 'MHP.logout()')}
+        <div class="tabs">
+          <div class="tab ${S.adminTab==='users'?'active':''}" onclick="MHP.setAdminTab('users')">Signed-up students</div>
+          <div class="tab ${S.adminTab==='chats'?'active':''}" onclick="MHP.setAdminTab('chats')">Mentor chats</div>
+          <div class="tab ${S.adminTab==='issues'?'active':''}" onclick="MHP.setAdminTab('issues')">Reported issues</div>
+        </div>
+        <div class="content" id="admin-tab-content"><div class="empty">Loading…</div></div>
+      </div>`;
+    if(S.adminTab==='users') renderAdminUsers();
+    else if(S.adminTab==='chats') renderAdminChats();
+    else renderAdminIssues();
+  }
+
+  function renderAdminUsers(){
+    const c = document.getElementById('admin-tab-content');
+    const unsubMentors = onSnapshot(collection(fs,'mentors'), (mSnap) => {
+      const mentorNames = {};
+      mSnap.docs.forEach(d => mentorNames[d.id] = d.data().name);
+      const unsub = onSnapshot(collection(fs,'students'), (qs) => {
+        if(!c) return;
+        const rows = qs.docs.map(d => ({ uid:d.id, ...d.data() }));
+        c.innerHTML = `
+          <div class="hint">Passwords are handled by Firebase Authentication and are never visible here — even to you. That's intentional and keeps every account secure.</div>
+          <div class="card" style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>School ID</th><th>Anonymous name</th><th>Mentor</th><th>Joined</th></tr></thead>
+              <tbody>
+                ${rows.length===0 ? '<tr><td colspan="4" class="muted">No sign-ups yet.</td></tr>' : rows.map(u => `
+                  <tr>
+                    <td>${esc(u.schoolId)}</td>
+                    <td class="anon-badge" style="font-size:14px;">${esc(u.anonName)}</td>
+                    <td>${u.mentorId ? esc(mentorNames[u.mentorId] || 'Unknown') : '<span class="muted">unassigned</span>'}</td>
+                    <td class="muted">${fmtTime(u.createdAt)}</td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>`;
+      }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load students (${esc(e.message)}).</div>`; });
+      track(unsub);
+    });
+    track(unsubMentors);
+  }
+
+  function renderAdminChats(){
+    const c = document.getElementById('admin-tab-content');
+    const unsub = onSnapshot(collection(fs,'mentors'), (mSnap) => {
+      const mentors = mSnap.docs.map(d => ({ uid:d.id, ...d.data() }));
+      if(!S.adminActiveMentor && mentors.length>0) S.adminActiveMentor = mentors[0].uid;
+      const activeMentorUid = S.adminActiveMentor;
+      const unsubStudents = onSnapshot(
+        activeMentorUid ? query(collection(fs,'students'), where('mentorId','==',activeMentorUid)) : collection(fs,'students'),
+        (sSnap) => {
+          if(!c) return;
+          const mentees = activeMentorUid ? sSnap.docs.map(d => ({ uid:d.id, ...d.data() })) : [];
+          if(!S.adminActiveMentee && mentees.length>0) S.adminActiveMentee = mentees[0].uid;
+          c.innerHTML = `
+            <div style="display:flex;gap:18px;">
+              <div style="width:190px;flex-shrink:0;">
+                <p class="muted" style="margin-bottom:8px;">Mentors</p>
+                ${mentors.length===0 ? '<p class="muted">None registered.</p>' : mentors.map(m => `
+                  <div class="mentee-item ${m.uid===activeMentorUid?'active':''}" style="display:block;" onclick="MHP.setAdminMentor('${m.uid}')">${esc(m.name)}</div>`).join('')}
+              </div>
+              <div style="width:190px;flex-shrink:0;">
+                <p class="muted" style="margin-bottom:8px;">Mentees</p>
+                ${mentees.length===0 ? '<p class="muted">None.</p>' : mentees.map(u => `
+                  <div class="mentee-item ${u.uid===S.adminActiveMentee?'active':''}" style="display:block;" onclick="MHP.setAdminMentee('${u.uid}')"><span class="anon-badge" style="font-size:13.5px;">${esc(u.anonName)}</span></div>`).join('')}
+              </div>
+              <div style="flex:1;" id="admin-chat-panel"></div>
+            </div>`;
+          renderAdminChatPanel(activeMentorUid, mentors.find(m=>m.uid===activeMentorUid), mentees.find(u=>u.uid===S.adminActiveMentee));
+        }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load mentees (${esc(e.message)}).</div>`; }
+      );
+      track(unsubStudents);
+    }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load mentors (${esc(e.message)}).</div>`; });
+    track(unsub);
+  }
+
+  function renderAdminChatPanel(mentorUid, mentor, mentee){
+    const panel = document.getElementById('admin-chat-panel');
+    if(!panel) return;
+    if(!mentorUid || !mentor || !mentee){ panel.innerHTML = '<div class="empty card">Select a mentor and mentee to view the conversation.</div>'; return; }
+    panel.innerHTML = `<div class="chat-panel"><div class="chat-header"><strong>${esc(mentor.name)} ↔ <span class="anon-badge" style="font-size:15px;">${esc(mentee.anonName)}</span></strong></div><div class="chat-body" id="admin-chat-body"><div class="empty">Loading…</div></div></div><p class="muted" style="margin-top:8px;">Read-only view for oversight.</p>`;
+    const key = pairKey(mentee.uid, mentorUid);
+    const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
+    const unsub = onSnapshot(q, (qs) => {
+      const body = document.getElementById('admin-chat-body');
+      if(!body) return;
+      if(qs.empty){ body.innerHTML = '<div class="empty">No messages yet.</div>'; return; }
+      body.innerHTML = qs.docs.map(d => {
+        const m = d.data();
+        return `<div class="msg-row ${m.from==='mentor'?'me':''}"><div class="bubble ${m.from==='mentor'?'me':'them'}">${esc(m.text)}<span class="ts">${fmtTime(m.ts)}</span></div></div>`;
+      }).join('');
+    });
+    track(unsub);
+  }
+
+  MHP.setAdminMentor = function(uid){ S.adminActiveMentor = uid; S.adminActiveMentee = null; render(); };
+  MHP.setAdminMentee = function(uid){ S.adminActiveMentee = uid; render(); };
+
+  function renderAdminIssues(){
+    const c = document.getElementById('admin-tab-content');
+    const unsub = onSnapshot(collection(fs,'issues'), (qs) => {
+      if(!c) return;
+      const issues = qs.docs.map(d => ({ id:d.id, ...d.data() })).sort((a,b)=> (b.ts?.toMillis?.()||0)-(a.ts?.toMillis?.()||0));
+      c.innerHTML = `<div style="max-width:720px;">
+        ${issues.length===0 ? '<p class="muted">No issues reported.</p>' : issues.map(i => `
+          <div class="card" style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="anon-badge" style="font-size:14px;">${esc(i.anonName)}</span>
+                <span style="font-size:12px;font-weight:600;color:var(--primary-dark);background:var(--primary-tint);padding:3px 9px;border-radius:999px;">${esc(categoryLabel(i.category))}</span>
+              </div>
+              <span class="pill ${i.status==='open'?'pill-open':'pill-resolved'}">${i.status}</span>
+            </div>
+            ${i.text ? `<p style="margin:0 0 10px;">${esc(i.text)}</p>` : '<p class="muted" style="margin:0 0 10px;">No additional details provided.</p>'}
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="muted">${fmtTime(i.ts)}</span>
+              ${i.status==='open' ? `<button class="btn-ghost" onclick="MHP.resolveIssue('${i.id}')">Mark resolved</button>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>`;
+    }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load issues (${esc(e.message)}).</div>`; });
+    track(unsub);
+  }
+
+  MHP.resolveIssue = async function(id){
+    try{ await updateDoc(doc(fs,'issues',id), { status:'resolved' }); }
+    catch(e){ alert('Could not update: ' + e.message); }
+  };
+
+  // ---------- shared nav ----------
+  MHP.go = function(view){ S.view = view; render(); };
+  MHP.setTab = function(tab){ S.tab = tab; render(); };
+  MHP.setAdminTab = function(tab){ S.adminTab = tab; render(); };
+  MHP.logout = async function(){
+    await signOut(auth);
+    S.role=null; S.uid=null; S.profile=null; S.view='landing';
+    S.activeMenteeUid=null; S.adminActiveMentor=null; S.adminActiveMentee=null; S.issueCategory=null;
+    render();
+  };
+
+  // ---------- auth state restore ----------
+  onAuthStateChanged(auth, async (user) => {
+    if(S.authBusy) return;
+    if(!user){
+      if(S.role){ S.role=null; S.uid=null; S.profile=null; S.view='landing'; render(); }
+      else if(S.view==='boot'){ S.view='landing'; render(); }
+      return;
+    }
+    if(S.role && S.uid===user.uid) return; // already handled by an explicit login/signup flow
+    S.authBusy = true;
+    try{
+      if(user.email === ADMIN_EMAIL){
+        S.role='admin'; S.uid=user.uid; S.profile={ email:user.email }; S.view='adminHome'; S.adminTab='users';
+      } else {
+        const sSnap = await getDoc(doc(fs,'students',user.uid));
+        if(sSnap.exists()){
+          S.role='student'; S.uid=user.uid; S.profile=sSnap.data(); S.view='studentMain'; S.tab='chat';
+        } else {
+          const mSnap = await getDoc(doc(fs,'mentors',user.uid));
+          if(mSnap.exists()){
+            S.role='mentor'; S.uid=user.uid; S.profile=mSnap.data(); S.view='mentorHome'; S.tab='mentees';
+          } else {
+            // Not admin, no student doc, no mentor doc: an interrupted signup. Sign out and let them retry cleanly.
+            await signOut(auth); S.view='landing';
+          }
+        }
+      }
+    }catch(e){
+      S.view='landing';
+    }
+    S.authBusy = false;
+    render();
+  });
+
+  render(); // shows the boot spinner until onAuthStateChanged fires
+})();
+</script>
