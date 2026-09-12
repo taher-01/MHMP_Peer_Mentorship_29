@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover"/>
+<title>Mental Health Mentorship Program</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -15,106 +21,165 @@
     --accent-tint:#FDF0DC;
     --danger:#B24A3E;
     --danger-tint:#F6E4E0;
-    --border:#DFDAEC;
+    --border:#E4DFF0;
     --bubble-me:#4E2E84;
     --bubble-them:#EFEDF8;
+    --grad-primary:linear-gradient(135deg,#5B3796 0%,#432571 100%);
+    --grad-accent:linear-gradient(135deg,#F8B85A 0%,#F09B2E 100%);
+    --shadow-sm:0 1px 2px rgba(56,32,97,.06), 0 1px 1px rgba(56,32,97,.04);
+    --shadow-md:0 6px 16px rgba(56,32,97,.08), 0 2px 6px rgba(56,32,97,.05);
+    --shadow-lg:0 16px 40px rgba(56,32,97,.14), 0 4px 12px rgba(56,32,97,.06);
+    --shadow-glow:0 0 0 4px rgba(78,46,132,.1);
   }
   *{box-sizing:border-box;}
   #mhp-root{
     font-family:'Inter',sans-serif;
     color:var(--ink);
-    background:var(--bg);
+    background:
+      radial-gradient(900px 480px at 12% -8%, rgba(147,132,214,.16), transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, rgba(246,169,60,.10), transparent 55%),
+      var(--bg);
     min-height:100vh;
     width:100%;
     display:flex;
     flex-direction:column;
     font-size:15px;
     line-height:1.5;
+    -webkit-font-smoothing:antialiased;
   }
   #mhp-root h1,#mhp-root h2,#mhp-root h3{
     font-family:'Fraunces',serif;
     font-weight:500;
     margin:0 0 6px 0;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.015em;
   }
-  #mhp-root .shell{max-width:1080px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;}
+  #mhp-root .shell{max-width:1080px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;animation:mhpfadein .35s ease;}
+  @keyframes mhpfadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
   #mhp-root button{
     font-family:'Inter',sans-serif;
     cursor:pointer;
     border:none;
-    border-radius:10px;
+    border-radius:11px;
     padding:11px 18px;
     font-size:14px;
     font-weight:600;
-    transition:transform .08s ease, opacity .15s ease;
+    transition:transform .12s cubic-bezier(.2,.9,.3,1.2), box-shadow .18s ease, background .18s ease, opacity .15s ease;
   }
   #mhp-root button:disabled{opacity:.55;cursor:default;}
-  #mhp-root button:active{transform:scale(0.97);}
-  #mhp-root .btn-primary{background:var(--primary);color:#fff;}
-  #mhp-root .btn-primary:hover{background:var(--primary-dark);}
-  #mhp-root .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--border);}
-  #mhp-root .btn-ghost:hover{background:var(--surface);}
-  #mhp-root .btn-danger{background:var(--danger);color:#fff;}
+  #mhp-root button:active{transform:scale(0.96);}
+  #mhp-root .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:var(--shadow-sm);}
+  #mhp-root .btn-primary:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+  #mhp-root .btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--border);}
+  #mhp-root .btn-ghost:hover{background:var(--surface);border-color:var(--primary-light);color:var(--primary-dark);}
+  #mhp-root .btn-danger{background:var(--danger);color:#fff;box-shadow:var(--shadow-sm);}
   #mhp-root input, #mhp-root textarea{
     font-family:'Inter',sans-serif;
     font-size:14px;
     padding:11px 13px;
-    border-radius:9px;
+    border-radius:10px;
     border:1px solid var(--border);
     background:#fff;
     width:100%;
     color:var(--ink);
+    transition:box-shadow .15s ease, border-color .15s ease;
   }
-  #mhp-root input:focus, #mhp-root textarea:focus{outline:2px solid var(--primary);outline-offset:1px;}
+  #mhp-root input:focus, #mhp-root textarea:focus{outline:none;border-color:var(--primary);box-shadow:var(--shadow-glow);}
   #mhp-root label{font-size:13px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:5px;}
   #mhp-root .field{margin-bottom:14px;}
-  #mhp-root .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;}
+  #mhp-root .card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm);transition:box-shadow .2s ease;}
   #mhp-root .muted{color:var(--ink-soft);font-size:13.5px;}
-  #mhp-root a.linklike{color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;}
+  #mhp-root a.linklike{color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
   #mhp-root .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;}
   #mhp-root .pill-open{background:var(--danger-tint);color:var(--danger);}
   #mhp-root .pill-resolved{background:var(--primary-tint);color:var(--primary-dark);}
   #mhp-root .topbar{
     display:flex;align-items:center;justify-content:space-between;
-    padding:14px 24px;border-bottom:1px solid var(--border);background:#fff;
+    padding:14px 24px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.85);
+    backdrop-filter:blur(8px);position:sticky;top:0;z-index:10;
   }
   #mhp-root .topbar .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;}
-  #mhp-root .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+  #mhp-root .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(246,169,60,.22);}
   #mhp-root .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);background:#fff;padding:0 24px;}
-  #mhp-root .tab{padding:14px 6px;margin-right:22px;font-weight:600;font-size:14px;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;}
+  #mhp-root .tab{padding:14px 6px;margin-right:22px;font-weight:600;font-size:14px;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;transition:color .15s ease, border-color .15s ease;}
+  #mhp-root .tab:hover{color:var(--primary-dark);}
   #mhp-root .tab.active{color:var(--primary-dark);border-bottom-color:var(--primary);}
   #mhp-root .content{flex:1;padding:26px 24px;display:flex;flex-direction:column;}
   #mhp-root .centerbox{max-width:420px;margin:48px auto;width:100%;}
   #mhp-root .msg-row{display:flex;margin-bottom:9px;}
   #mhp-root .msg-row.me{justify-content:flex-end;}
-  #mhp-root .bubble{max-width:70%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.42;}
-  #mhp-root .bubble.me{background:var(--bubble-me);color:#fff;border-bottom-right-radius:4px;}
-  #mhp-root .bubble.them{background:var(--bubble-them);color:var(--ink);border-bottom-left-radius:4px;}
+  #mhp-root .bubble{max-width:70%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.42;box-shadow:var(--shadow-sm);}
+  #mhp-root .bubble.me{background:var(--grad-primary);color:#fff;border-bottom-right-radius:4px;}
+  #mhp-root .bubble.them{background:var(--bubble-them);color:var(--ink);border-bottom-left-radius:4px;box-shadow:none;border:1px solid var(--border);}
   #mhp-root .bubble .ts{display:block;font-size:10.5px;margin-top:4px;opacity:.65;}
-  #mhp-root .chat-panel{display:flex;flex-direction:column;height:60vh;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
-  #mhp-root .chat-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);}
+  #mhp-root .chat-panel{display:flex;flex-direction:column;height:60vh;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff;box-shadow:var(--shadow-md);}
+  #mhp-root .chat-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#fff,var(--surface));}
   #mhp-root .chat-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;}
-  #mhp-root .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);}
+  #mhp-root .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:#fff;}
   #mhp-root .chat-input input{flex:1;}
-  #mhp-root .mentee-item{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;background:#fff;}
-  #mhp-root .mentee-item:hover{border-color:var(--primary);}
-  #mhp-root .mentee-item.active{border-color:var(--primary);background:var(--primary-tint);}
+  #mhp-root .mentee-item{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid var(--border);border-radius:13px;margin-bottom:8px;cursor:pointer;background:#fff;transition:border-color .15s ease, box-shadow .15s ease, transform .12s ease;}
+  #mhp-root .mentee-item:hover{border-color:var(--primary-light);box-shadow:var(--shadow-sm);transform:translateY(-1px);}
+  #mhp-root .mentor-chats-layout{display:flex;gap:18px;}
+  #mhp-root .mentor-chats-sidebar{width:220px;flex-shrink:0;}
+  #mhp-root .admin-chats-layout{display:flex;gap:18px;}
+  #mhp-root .admin-chats-col{width:190px;flex-shrink:0;}
+  #mhp-root .two-col-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  #mhp-root .mentee-item.active{border-color:var(--primary);background:var(--primary-tint);box-shadow:var(--shadow-sm);}
   #mhp-root table{width:100%;border-collapse:collapse;font-size:13.5px;}
   #mhp-root th{text-align:left;color:var(--ink-soft);font-weight:600;padding:9px 10px;border-bottom:1px solid var(--border);font-size:12.5px;text-transform:none;}
   #mhp-root td{padding:10px 10px;border-bottom:1px solid var(--surface-2);}
+  #mhp-root tr:hover td{background:var(--surface);}
   #mhp-root .role-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:760px;margin:40px auto;}
-  #mhp-root .role-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 20px;text-align:left;cursor:pointer;transition:border-color .15s;}
-  #mhp-root .role-card:hover{border-color:var(--primary);}
+  #mhp-root .role-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px 20px;text-align:left;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease, transform .2s cubic-bezier(.2,.9,.3,1.2);box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+  #mhp-root .role-card::before{content:"";position:absolute;inset:0;background:var(--grad-primary);opacity:0;transition:opacity .2s ease;z-index:0;}
+  #mhp-root .role-card:hover{border-color:transparent;box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+  #mhp-root .role-card:hover::before{opacity:1;}
+  #mhp-root .role-card > *{position:relative;z-index:1;}
+  #mhp-root .role-card:hover h3, #mhp-root .role-card:hover p{color:#fff;}
+  #mhp-root .role-card .role-icon{font-size:26px;margin-bottom:10px;display:block;}
   #mhp-root .empty{padding:40px 20px;text-align:center;color:var(--ink-soft);}
-  #mhp-root .hint{background:var(--primary-tint);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:12.5px;color:var(--primary-dark);margin-bottom:16px;}
+  #mhp-root .hint{background:var(--primary-tint);border:1px solid var(--border);border-radius:12px;padding:10px 13px;font-size:12.5px;color:var(--primary-dark);margin-bottom:16px;}
+  #mhp-root .banner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--accent-tint);border-bottom:1px solid var(--border);padding:10px 24px;font-size:13.5px;color:var(--primary-dark);}
+  #mhp-root .banner-admin{background:var(--primary-tint);border-bottom:1px solid var(--border);border-left:4px solid var(--primary);align-items:flex-start;padding:14px 24px;}
+  #mhp-root .announcement-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary);margin-bottom:3px;}
   #mhp-root .anon-badge{font-family:'Fraunces',serif;font-weight:600;font-size:16px;}
   #mhp-root .spinner{width:22px;height:22px;border-radius:50%;border:3px solid var(--surface-2);border-top-color:var(--primary);animation:mhpspin .7s linear infinite;margin:0 auto;}
+  #mhp-root .mosp-note{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:5px 12px;}
   @keyframes mhpspin{to{transform:rotate(360deg);}}
   @media (max-width:640px){
-    #mhp-root .role-grid{grid-template-columns:1fr;}
+    #mhp-root .role-grid{grid-template-columns:1fr;margin:24px auto;}
     #mhp-root .bubble{max-width:85%;}
+    #mhp-root .mentor-chats-layout,
+    #mhp-root .admin-chats-layout{flex-direction:column;}
+    #mhp-root .mentor-chats-sidebar,
+    #mhp-root .admin-chats-col{width:100%;}
+    #mhp-root .two-col-form{grid-template-columns:1fr;}
+    #mhp-root .topbar{padding:12px 16px;flex-wrap:wrap;row-gap:8px;}
+    #mhp-root .topbar .brand{font-size:17px;}
+    #mhp-root .tabs{padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    #mhp-root .tab{margin-right:16px;padding:12px 4px;white-space:nowrap;font-size:13.5px;}
+    #mhp-root .content{padding:16px;}
+    #mhp-root .banner{padding:10px 16px;}
+    #mhp-root .banner-admin{padding:12px 16px;}
+    #mhp-root .centerbox{margin:20px auto;}
+    #mhp-root .card{padding:18px;}
+    #mhp-root .role-card{padding:20px 16px;}
+    #mhp-root h1{font-size:24px !important;}
+    #mhp-root h2{font-size:20px;}
+    #mhp-root button{padding:12px 16px;min-height:44px;}
+    #mhp-root input, #mhp-root textarea, #mhp-root select{padding:12px;font-size:16px;min-height:44px;}
+    #mhp-root textarea{min-height:100px;}
+    #mhp-root .chat-panel{height:calc(100dvh - 190px);border-radius:12px;}
+    #mhp-root table{font-size:12.5px;}
+    #mhp-root th, #mhp-root td{padding:8px 6px;}
   }
+  @media (max-width:380px){
+    #mhp-root .topbar .brand{font-size:15px;}
+    #mhp-root h1{font-size:21px !important;}
+  }
+  html,body{margin:0;padding:0;}
 </style>
+</head>
+<body>
 
 <div id="mhp-root"></div>
 
@@ -126,7 +191,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc, collection, query, where,
-  onSnapshot, orderBy, limit, serverTimestamp, runTransaction, increment
+  onSnapshot, orderBy, limit, serverTimestamp, runTransaction, increment, documentId, arrayUnion
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ---------- Firebase project config ----------
@@ -152,11 +217,13 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
 const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
 
 (function(){
+  window.MHP = window.MHP || {};
   const root = document.getElementById('mhp-root');
 
   let S = { view:'boot', role:null, uid:null, profile:null, tab:'chat', adminTab:'students',
             activeMenteeUid:null, adminActiveMentor:null, adminActiveMentee:null, issueCategory:null,
-            authBusy:false, showAddStudents:false, showAddMentor:false };
+            authBusy:false, showAddStudents:false, showAddMentor:false, showSendNotif:false,
+            toast:null, adminNotifs:[], notifRecipients:{ boys:[], girls:[], mentorsBoy:[], mentorsGirl:[] } };
 
   let liveUnsubs = [];
   function clearLiveListeners(){ liveUnsubs.forEach(u => { try{u();}catch(e){} }); liveUnsubs = []; }
@@ -171,6 +238,49 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + ' · ' + d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
   }
   function pairKey(studentUid, mentorUid){ return studentUid + '_' + mentorUid; }
+
+  // --- unread tracking: a lightweight parent doc at messages/{pairKey} holds
+  // lastMessageTs, plus a per-side unread COUNT that increments when the other side
+  // sends a message and resets to 0 when that side opens the conversation.
+  async function markRead(key, readField, unreadField){
+    try{ await setDoc(doc(fs,'messages',key), { [readField]: serverTimestamp(), [unreadField]: 0 }, { merge:true }); }catch(e){}
+  }
+  async function bumpLastMessage(key, senderReadField, senderUnreadField, otherUnreadField){
+    try{
+      await setDoc(doc(fs,'messages',key), {
+        lastMessageTs: serverTimestamp(),
+        [senderReadField]: serverTimestamp(),
+        [senderUnreadField]: 0,
+        [otherUnreadField]: increment(1)
+      }, { merge:true });
+    }catch(e){}
+  }
+  function chunk(arr, size){
+    const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out;
+  }
+  function unreadCountOf(data, unreadField){
+    return (data && data[unreadField]) || 0;
+  }
+  // Watches unread counts for a batch of pairKeys at once; calls cb with a { pairKey: number } map
+  // on every change. Chunked into groups of 30 (Firestore's "in" query limit).
+  function watchUnread(pairKeys, unreadField, cb){
+    if(pairKeys.length===0){ cb({}); return ()=>{}; }
+    const groups = chunk(pairKeys, 30);
+    const state = {};
+    const unsubs = groups.map(g => {
+      const q = query(collection(fs,'messages'), where(documentId(),'in',g));
+      return onSnapshot(q, (qs) => {
+        g.forEach(k => { state[k] = 0; });
+        qs.docs.forEach(d => { state[d.id] = unreadCountOf(d.data(), unreadField); });
+        cb({...state});
+      });
+    });
+    return () => unsubs.forEach(u=>u());
+  }
+  function unreadBadge(count){
+    if(!count || count<=0) return '';
+    return `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;margin-left:6px;vertical-align:middle;">${count>99?'99+':count}</span>`;
+  }
 
   function studentEmail(id){ return id.toLowerCase() + '@' + STUDENT_DOMAIN; }
   function mentorEmail(slug){ return slug + '@' + MENTOR_DOMAIN; }
@@ -257,6 +367,81 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
       <span style="color:#25D366;font-size:14px;">●</span> WhatsApp updates
     </a>`;
   }
+  function renderBanners(){
+    let html = '';
+    if(S.toast){
+      html += `<div class="banner">
+        <span>${esc(S.toast)}</span>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:12px;flex-shrink:0;" onclick="MHP.dismissToast()">Dismiss</button>
+      </div>`;
+    }
+    (S.adminNotifs||[]).forEach(n => {
+      html += `<div class="banner banner-admin">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📣</div>
+        <div style="flex:1;">
+          <div class="announcement-label">Announcement from management</div>
+          <div>${esc(n.text)}</div>
+        </div>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:12px;flex-shrink:0;align-self:flex-start;" onclick="MHP.dismissNotif('${n.id}')">Dismiss</button>
+      </div>`;
+    });
+    return html;
+  }
+  MHP.dismissToast = function(){
+    S.toast = null;
+    const el = document.getElementById('banner-area');
+    if(el) el.innerHTML = renderBanners();
+  };
+  MHP.dismissNotif = async function(id){
+    S.adminNotifs = (S.adminNotifs||[]).filter(n=>n.id!==id);
+    const el = document.getElementById('banner-area');
+    if(el) el.innerHTML = renderBanners();
+    try{
+      const col = S.role==='student' ? 'students' : 'mentors';
+      await updateDoc(doc(fs,col,S.uid), { dismissedNotifs: arrayUnion(id) });
+      S.profile.dismissedNotifs = [...(S.profile.dismissedNotifs||[]), id];
+    }catch(e){}
+  };
+  // Subscribes to broadcast notifications targeted at the current user, filtered against
+  // what they've already dismissed. Call from any screen that should surface them.
+  function watchMyNotifications(){
+    const dismissed = new Set(S.profile.dismissedNotifs || []);
+    const q = query(collection(fs,'notifications'), where('targetUids','array-contains', S.uid));
+    const unsub = onSnapshot(q, (qs) => {
+      const items = qs.docs.filter(d=>!dismissed.has(d.id)).map(d=>({id:d.id, ...d.data()}));
+      items.sort((a,b) => (b.createdAt?.toMillis?.()||0) - (a.createdAt?.toMillis?.()||0));
+      S.adminNotifs = items;
+      const el = document.getElementById('banner-area');
+      if(el) el.innerHTML = renderBanners();
+    });
+    track(unsub);
+  }
+  // One-time check on login/restore: is there already an unread chat message waiting?
+  async function checkChatToast(){
+    try{
+      if(S.role==='student'){
+        if(!S.profile.mentorId) return;
+        const key = pairKey(S.uid, S.profile.mentorId);
+        const msnap = await getDoc(doc(fs,'messages',key));
+        const cnt = unreadCountOf(msnap.exists()?msnap.data():null, 'unreadForStudent');
+        if(cnt>0){
+          const mSnap = await getDoc(doc(fs,'mentors',S.profile.mentorId));
+          const name = mSnap.exists() ? mSnap.data().name : 'Your mentor';
+          S.toast = `💬 ${name} sent you ${cnt} new message${cnt>1?'s':''}.`;
+        }
+      } else if(S.role==='mentor'){
+        const menteesSnap = await getDocs(query(collection(fs,'students'), where('mentorId','==',S.uid)));
+        const pairKeys = menteesSnap.docs.map(d => pairKey(d.id, S.uid));
+        if(pairKeys.length===0) return;
+        let total = 0;
+        for(const g of chunk(pairKeys,30)){
+          const qs = await getDocs(query(collection(fs,'messages'), where(documentId(),'in',g)));
+          qs.docs.forEach(d => { total += unreadCountOf(d.data(), 'unreadForMentor'); });
+        }
+        if(total>0) S.toast = `💬 You have ${total} new message${total>1?'s':''} from your mentees.`;
+      }
+    }catch(e){}
+  }
   function brandMark(){
     return `<div style="display:flex;align-items:center;gap:2px;font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1;">
       <span style="color:var(--primary);">M</span>
@@ -280,17 +465,21 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
             <p class="muted" style="letter-spacing:.02em;margin-bottom:2px;">Mental Health Mentorship Program</p>
             <h1 style="font-size:30px;">A quiet, anonymous space to talk to someone who'll listen</h1>
             <p class="muted" style="font-size:15px;">Every student in the program is matched with a trained peer mentor. No names, no judgment — just support. Choose how you're joining today.</p>
+            <div style="margin-top:14px;"><span class="mosp-note">A subsection of the Mentorship Obour STEM Program (MOSP)</span></div>
           </div>
           <div class="role-grid">
             <div class="role-card" onclick="MHP.go('studentLogin')">
+              <span class="role-icon">🎓</span>
               <h3>I'm a student</h3>
               <p class="muted">Sign in or sign up with your school ID to chat with your mentor.</p>
             </div>
             <div class="role-card" onclick="MHP.go('mentorAuth')">
+              <span class="role-icon">🤝</span>
               <h3>I'm a mentor</h3>
               <p class="muted">Sign in to see your mentees and continue conversations.</p>
             </div>
             <div class="role-card" onclick="MHP.go('adminAuth')">
+              <span class="role-icon">🗂️</span>
               <h3>Program management</h3>
               <p class="muted">Sign in to oversee sign-ups, chats, and submitted issues.</p>
             </div>
@@ -317,8 +506,6 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         </div>
       </div>`;
   }
-
-  window.MHP = window.MHP || {};
 
   MHP.doStudentSignup = async function(){
     const id = document.getElementById('su-id').value.trim().toUpperCase();
@@ -397,7 +584,8 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         snap = await getDoc(doc(fs,'students',cred.user.uid));
       }
       S.role='student'; S.uid=cred.user.uid; S.profile=snap.data();
-      S.view='studentMain'; S.tab='chat';
+      S.view='studentMain'; S.tab='info';
+      await checkChatToast();
       S.authBusy = false;
       render();
     }catch(e){
@@ -417,7 +605,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
           <div class="centerbox card" style="text-align:center;">
             <h2>Welcome, <span class="anon-badge">${esc(p.anonName)}</span></h2>
             <p class="muted" style="margin:14px 0 20px;">This is your identity in the program — nobody, including your mentor, sees your real name or school ID here. You've been matched with a mentor and can start chatting whenever you're ready. There's also a page to report any issue directly to program management, always anonymously.</p>
-            <button class="btn-primary" style="width:100%;" onclick="MHP.goToStudentChat()">Go to my chat</button>
+            <button class="btn-primary" style="width:100%;" onclick="MHP.enterStudentApp()">Continue</button>
           </div>
         </div>
       </div>`;
@@ -430,13 +618,69 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
       <div class="shell">
         ${topbar(p.anonName, 'MHP.logout()', true)}
         <div class="tabs">
-          <div class="tab ${S.tab==='chat'?'active':''}" onclick="MHP.setTab('chat')">Chat with my mentor</div>
+          <div class="tab ${S.tab==='info'?'active':''}" onclick="MHP.setTab('info')">About MHMP</div>
+          <div class="tab ${S.tab==='chat'?'active':''}" onclick="MHP.setTab('chat')">Chat with my mentor<span id="chat-tab-dot"></span></div>
           <div class="tab ${S.tab==='issue'?'active':''}" onclick="MHP.setTab('issue')">Report an issue</div>
         </div>
+        <div id="banner-area">${renderBanners()}</div>
         <div class="content" id="student-tab-content"></div>
       </div>`;
-    if(S.tab==='chat') renderStudentChatTab(p);
+    watchMyNotifications();
+    if(p.mentorId){
+      const key = pairKey(S.uid, p.mentorId);
+      const unsub = onSnapshot(doc(fs,'messages',key), (snap) => {
+        const dotEl = document.getElementById('chat-tab-dot');
+        if(!dotEl) return;
+        const count = S.tab!=='chat' ? unreadCountOf(snap.exists()?snap.data():null, 'unreadForStudent') : 0;
+        dotEl.innerHTML = unreadBadge(count);
+      });
+      track(unsub);
+    }
+    if(S.tab==='info') renderStudentInfoTab(p);
+    else if(S.tab==='chat') renderStudentChatTab(p);
     else renderStudentIssueTab(p);
+  }
+
+  function renderStudentInfoTab(p){
+    const c = document.getElementById('student-tab-content');
+    c.innerHTML = `
+      <div style="max-width:640px;margin:0 auto;">
+        <div class="card" style="text-align:center;margin-bottom:18px;">
+          <div style="display:flex;justify-content:center;margin-bottom:10px;">${brandMark()}</div>
+          <p class="muted">Supporting the mental wellbeing of Egypt's STEM students</p>
+          <div style="margin-top:10px;"><span class="mosp-note">A subsection of the Mentorship Obour STEM Program (MOSP)</span></div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:15px;">What is MHMP?</h3>
+          <p class="muted">The Mental Health Mentorship Program supports the mental wellbeing of students across Egypt's STEM schools. Trained mentors lead in-school sessions to help freshman students recognize and navigate the mental health challenges common in the STEM community — early, and with the right words for it.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:15px;">Our mission</h3>
+          <p class="muted">To raise awareness among the next generation of STEM students about mental health, and to actively improve the mental wellbeing of STEM students across Egypt.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:15px;">Our vision</h3>
+          <p class="muted">A future where mental health knowledge reaches every STEM school in Egypt — building a community where achievement and wellbeing grow side by side, never at each other's expense.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:15px;">Why this approach</h3>
+          <p class="muted">Before building the program, we ran a survey to understand the mental health challenges STEM students actually face — things like homesickness, burnout, imposter syndrome, and pressure around academic identity. That research shaped the training curriculum every mentor goes through.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:15px;">Who trains our mentors</h3>
+          <p class="muted">Every mentor is trained and supervised by experienced mental health professionals — clinicians and researchers holding credentials including MSc and PhD-level clinical psychology, and specialized training in psychotherapy and mental health.</p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:15px;">How mentors are chosen</h3>
+          <p class="muted">Mentors go through a two-stage selection: an application and interview, followed by a training period where their attendance, engagement, and commitment are assessed by our trainers — only mentors who perform well through training move forward. We look for fairness, discretion, and active listening above all.</p>
+        </div>
+      </div>`;
   }
 
   function renderStudentChatTab(p){
@@ -463,6 +707,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
       if(nameEl && mSnap.exists()) nameEl.textContent = mSnap.data().name;
     }).catch(()=>{});
     const key = pairKey(S.uid, p.mentorId);
+    markRead(key, 'lastReadByStudent', 'unreadForStudent');
     const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
     const unsub = onSnapshot(q, (qs) => {
       const body = document.getElementById('chat-body');
@@ -475,6 +720,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         </div>`;
       }).join('');
       body.scrollTop = body.scrollHeight;
+      markRead(key, 'lastReadByStudent', 'unreadForStudent');
     }, (e) => {
       const body = document.getElementById('chat-body');
       if(body) body.innerHTML = `<div class="empty">Couldn't load messages (${esc(e.message)}).</div>`;
@@ -499,6 +745,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     const key = pairKey(S.uid, S.profile.mentorId);
     try{
       await addDoc(collection(fs,'messages',key,'thread'), { from:'student', text, ts: serverTimestamp() });
+      await bumpLastMessage(key, 'lastReadByStudent', 'unreadForStudent', 'unreadForMentor');
     }catch(e){ alert('Message failed to send: ' + e.message); }
   };
 
@@ -603,6 +850,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
       }
       S.role='mentor'; S.uid=cred.user.uid; S.profile = snap.data();
       S.view='mentorHome'; S.tab='mentees'; S.activeMenteeUid=null;
+      await checkChatToast();
       S.authBusy = false;
       render();
     }catch(e){
@@ -621,13 +869,20 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
           <div class="tab ${S.tab==='mentees'?'active':''}" onclick="MHP.setTab('mentees')">My mentees</div>
           <div class="tab ${S.tab==='chats'?'active':''}" onclick="MHP.setTab('chats')">Active chats</div>
         </div>
+        <div id="banner-area">${renderBanners()}</div>
         <div class="content" id="mentor-tab-content"><div class="empty">Loading…</div></div>
       </div>`;
+    watchMyNotifications();
     const q = query(collection(fs,'students'), where('mentorId','==',S.uid));
     const unsub = onSnapshot(q, (qs) => {
       const mentees = qs.docs.map(d => ({ uid:d.id, ...d.data() }));
-      if(S.tab==='mentees') renderMentorMenteesTab(mentees);
-      else renderMentorChatsTab(mentees);
+      const pairKeys = mentees.map(u => pairKey(u.uid, S.uid));
+      const unwatch = watchUnread(pairKeys, 'unreadForMentor', (map) => {
+        S.mentorUnreadMap = map;
+        if(S.tab==='mentees') renderMentorMenteesTab(mentees);
+        else renderMentorChatsTab(mentees);
+      });
+      track(unwatch);
     }, (e) => {
       const c = document.getElementById('mentor-tab-content');
       if(c) c.innerHTML = `<div class="empty">Couldn't load mentees (${esc(e.message)}).</div>`;
@@ -638,11 +893,12 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
   function renderMentorMenteesTab(mentees){
     const c = document.getElementById('mentor-tab-content');
     if(!c) return;
+    const map = S.mentorUnreadMap || {};
     c.innerHTML = mentees.length===0
       ? '<div class="empty card">No mentees assigned yet.</div>'
       : `<div style="max-width:520px;">${mentees.map(u => `
           <div class="mentee-item">
-            <span class="anon-badge">${esc(u.anonName)}</span>
+            <span class="anon-badge">${esc(u.anonName)}${unreadBadge(map[pairKey(u.uid,S.uid)])}</span>
             <button class="btn-ghost" onclick="MHP.openMenteeChat('${u.uid}')">Open chat</button>
           </div>`).join('')}</div>`;
   }
@@ -653,12 +909,13 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     const c = document.getElementById('mentor-tab-content');
     if(!c) return;
     if(!S.activeMenteeUid && mentees.length>0) S.activeMenteeUid = mentees[0].uid;
+    const map = S.mentorUnreadMap || {};
     c.innerHTML = `
-      <div style="display:flex;gap:18px;">
-        <div style="width:220px;flex-shrink:0;">
+      <div class="mentor-chats-layout">
+        <div class="mentor-chats-sidebar">
           ${mentees.length===0 ? '<p class="muted">No mentees yet.</p>' : mentees.map(u => `
             <div class="mentee-item ${u.uid===S.activeMenteeUid?'active':''}" onclick="MHP.openMenteeChat('${u.uid}')" style="display:block;">
-              <span class="anon-badge" style="font-size:14px;">${esc(u.anonName)}</span>
+              <span class="anon-badge" style="font-size:14px;">${esc(u.anonName)}${unreadBadge(map[pairKey(u.uid,S.uid)])}</span>
             </div>`).join('')}
         </div>
         <div style="flex:1;" id="mentor-chat-panel"></div>
@@ -681,6 +938,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         </div>
       </div>`;
     const key = pairKey(u.uid, S.uid);
+    if((S.mentorUnreadMap||{})[key] > 0) markRead(key, 'lastReadByMentor', 'unreadForMentor');
     const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
     const unsub = onSnapshot(q, (qs) => {
       const body = document.getElementById('mentor-chat-body');
@@ -693,6 +951,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         </div>`;
       }).join('');
       body.scrollTop = body.scrollHeight;
+      if((S.mentorUnreadMap||{})[key] > 0) markRead(key, 'lastReadByMentor', 'unreadForMentor');
     });
     track(unsub);
   }
@@ -705,6 +964,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     const key = pairKey(menteeUid, S.uid);
     try{
       await addDoc(collection(fs,'messages',key,'thread'), { from:'mentor', text, ts: serverTimestamp() });
+      await bumpLastMessage(key, 'lastReadByMentor', 'unreadForMentor', 'unreadForStudent');
     }catch(e){ alert('Message failed to send: ' + e.message); }
   };
 
@@ -759,12 +1019,14 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
           <div class="tab ${S.adminTab==='mentors'?'active':''}" onclick="MHP.setAdminTab('mentors')">Mentors</div>
           <div class="tab ${S.adminTab==='chats'?'active':''}" onclick="MHP.setAdminTab('chats')">Mentor chats</div>
           <div class="tab ${S.adminTab==='issues'?'active':''}" onclick="MHP.setAdminTab('issues')">Reported issues</div>
+          <div class="tab ${S.adminTab==='notifications'?'active':''}" onclick="MHP.setAdminTab('notifications')">Notifications</div>
         </div>
         <div class="content" id="admin-tab-content"><div class="empty">Loading…</div></div>
       </div>`;
     if(S.adminTab==='students') renderAdminStudents();
     else if(S.adminTab==='mentors') renderAdminMentors();
     else if(S.adminTab==='chats') renderAdminChats();
+    else if(S.adminTab==='notifications') renderAdminNotifications();
     else renderAdminIssues();
   }
 
@@ -792,7 +1054,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
             ${S.showAddStudents ? `
               <div style="margin-top:14px;">
                 <div id="add-students-err"></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div class="two-col-form">
                   <div class="field"><label>Boys' school IDs (one per line)</label><textarea id="add-boys-ids" rows="4" placeholder="S1001&#10;S1002"></textarea></div>
                   <div class="field"><label>Girls' school IDs (one per line)</label><textarea id="add-girls-ids" rows="4" placeholder="S2001&#10;S2002"></textarea></div>
                 </div>
@@ -1023,21 +1285,13 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
           if(!c) return;
           const mentees = activeMentorUid ? sSnap.docs.map(d => ({ uid:d.id, ...d.data() })) : [];
           if(!S.adminActiveMentee && mentees.length>0) S.adminActiveMentee = mentees[0].uid;
-          c.innerHTML = `
-            <div style="display:flex;gap:18px;">
-              <div style="width:190px;flex-shrink:0;">
-                <p class="muted" style="margin-bottom:8px;">Mentors</p>
-                ${mentors.length===0 ? '<p class="muted">None registered.</p>' : mentors.map(m => `
-                  <div class="mentee-item ${m.uid===activeMentorUid?'active':''}" style="display:block;" onclick="MHP.setAdminMentor('${m.uid}')">${esc(m.name)}</div>`).join('')}
-              </div>
-              <div style="width:190px;flex-shrink:0;">
-                <p class="muted" style="margin-bottom:8px;">Mentees</p>
-                ${mentees.length===0 ? '<p class="muted">None.</p>' : mentees.map(u => `
-                  <div class="mentee-item ${u.uid===S.adminActiveMentee?'active':''}" style="display:block;" onclick="MHP.setAdminMentee('${u.uid}')"><span class="anon-badge" style="font-size:13.5px;">${esc(u.anonName)}</span></div>`).join('')}
-              </div>
-              <div style="flex:1;" id="admin-chat-panel"></div>
-            </div>`;
-          renderAdminChatPanel(activeMentorUid, mentors.find(m=>m.uid===activeMentorUid), mentees.find(u=>u.uid===S.adminActiveMentee));
+          const pairKeys = activeMentorUid ? mentees.map(u => pairKey(u.uid, activeMentorUid)) : [];
+          const unwatch = watchUnread(pairKeys, 'unreadForMentor', (map) => {
+            S.adminUnreadMap = map;
+            paintAdminChatsList(mentors, activeMentorUid, mentees);
+          });
+          track(unwatch);
+          paintAdminChatsList(mentors, activeMentorUid, mentees);
         }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load mentees (${esc(e.message)}).</div>`; }
       );
       track(unsubStudents);
@@ -1045,11 +1299,32 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     track(unsub);
   }
 
+  function paintAdminChatsList(mentors, activeMentorUid, mentees){
+    const c = document.getElementById('admin-tab-content');
+    if(!c) return;
+    const map = S.adminUnreadMap || {};
+    c.innerHTML = `
+      <div class="admin-chats-layout">
+        <div class="admin-chats-col">
+          <p class="muted" style="margin-bottom:8px;">Mentors</p>
+          ${mentors.length===0 ? '<p class="muted">None registered.</p>' : mentors.map(m => `
+            <div class="mentee-item ${m.uid===activeMentorUid?'active':''}" style="display:block;" onclick="MHP.setAdminMentor('${m.uid}')">${esc(m.name)}</div>`).join('')}
+        </div>
+        <div class="admin-chats-col">
+          <p class="muted" style="margin-bottom:8px;">Mentees</p>
+          ${mentees.length===0 ? '<p class="muted">None.</p>' : mentees.map(u => `
+            <div class="mentee-item ${u.uid===S.adminActiveMentee?'active':''}" style="display:block;" onclick="MHP.setAdminMentee('${u.uid}')"><span class="anon-badge" style="font-size:13.5px;">${esc(u.anonName)}${unreadBadge(map[pairKey(u.uid,activeMentorUid)])}</span></div>`).join('')}
+        </div>
+        <div style="flex:1;min-width:0;" id="admin-chat-panel"></div>
+      </div>`;
+    renderAdminChatPanel(activeMentorUid, mentors.find(m=>m.uid===activeMentorUid), mentees.find(u=>u.uid===S.adminActiveMentee));
+  }
+
   function renderAdminChatPanel(mentorUid, mentor, mentee){
     const panel = document.getElementById('admin-chat-panel');
     if(!panel) return;
     if(!mentorUid || !mentor || !mentee){ panel.innerHTML = '<div class="empty card">Select a mentor and mentee to view the conversation.</div>'; return; }
-    panel.innerHTML = `<div class="chat-panel"><div class="chat-header"><strong>${esc(mentor.name)} ↔ <span class="anon-badge" style="font-size:15px;">${esc(mentee.anonName)}</span></strong></div><div class="chat-body" id="admin-chat-body"><div class="empty">Loading…</div></div></div><p class="muted" style="margin-top:8px;">Read-only view for oversight.</p>`;
+    panel.innerHTML = `<div class="chat-panel"><div class="chat-header"><strong>${esc(mentor.name)} ↔ <span class="anon-badge" style="font-size:15px;">${esc(mentee.anonName)}</span></strong></div><div class="chat-body" id="admin-chat-body"><div class="empty">Loading…</div></div></div><p class="muted" style="margin-top:8px;">Read-only view for oversight. The dot next to a mentee's name means the mentor hasn't opened that chat since the last message.</p>`;
     const key = pairKey(mentee.uid, mentorUid);
     const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
     const unsub = onSnapshot(q, (qs) => {
@@ -1098,9 +1373,91 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     catch(e){ alert('Could not update: ' + e.message); }
   };
 
+  // ---------- ADMIN: NOTIFICATIONS ----------
+  function renderAdminNotifications(){
+    const unsubS = onSnapshot(collection(fs,'students'), (sSnap) => {
+      const students = sSnap.docs.map(d => ({ uid:d.id, ...d.data() }));
+      const unsubM = onSnapshot(collection(fs,'mentors'), (mSnap) => {
+        const mentors = mSnap.docs.map(d => ({ uid:d.id, ...d.data() }));
+        paintAdminNotifications(students, mentors);
+      });
+      track(unsubM);
+    });
+    track(unsubS);
+  }
+
+  function paintAdminNotifications(students, mentors){
+    const c = document.getElementById('admin-tab-content');
+    if(!c) return;
+    c.innerHTML = `
+      <div class="card" style="max-width:680px;">
+        <h3>Send a notification</h3>
+        <p class="muted">Shows up as a dismissible banner for whoever you select, the next time they're on the platform.</p>
+        <div class="field"><textarea id="notif-text" rows="3" placeholder="Write your message…"></textarea></div>
+        <div id="notif-err"></div>
+        <div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+          <button class="btn-ghost" onclick="MHP.toggleAllNotifCheckboxes('student',true)">Select all students</button>
+          <button class="btn-ghost" onclick="MHP.toggleAllNotifCheckboxes('mentor',true)">Select all mentors</button>
+          <button class="btn-ghost" onclick="MHP.toggleAllNotifCheckboxes('all',false)">Clear all</button>
+        </div>
+        <div class="two-col-form" style="max-height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:12px;">
+          <div>
+            <p class="muted" style="margin-bottom:6px;font-weight:600;">Students (${students.length})</p>
+            ${students.length===0 ? '<p class="muted">None yet.</p>' : students.map(u => `<label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0;"><input type="checkbox" class="notif-cb notif-cb-student" value="${u.uid}"/> ${esc(u.anonName)}</label>`).join('')}
+          </div>
+          <div>
+            <p class="muted" style="margin-bottom:6px;font-weight:600;">Mentors (${mentors.length})</p>
+            ${mentors.length===0 ? '<p class="muted">None yet.</p>' : mentors.map(m => `<label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0;"><input type="checkbox" class="notif-cb notif-cb-mentor" value="${m.uid}"/> ${esc(m.name)}</label>`).join('')}
+          </div>
+        </div>
+        <button class="btn-primary" style="margin-top:14px;" id="send-notif-btn" onclick="MHP.sendNotification()">Send notification</button>
+      </div>
+      <div style="max-width:680px;">
+        <h3 style="font-size:15px;">Recently sent</h3>
+        <div id="notif-history"><p class="muted">Loading…</p></div>
+      </div>`;
+    const unsub = onSnapshot(collection(fs,'notifications'), (qs) => {
+      const hist = document.getElementById('notif-history');
+      if(!hist) return;
+      const items = qs.docs.map(d => ({ id:d.id, ...d.data() }))
+        .sort((a,b) => (b.createdAt?.toMillis?.()||0) - (a.createdAt?.toMillis?.()||0)).slice(0,15);
+      hist.innerHTML = items.length===0 ? '<p class="muted">None yet.</p>' : items.map(n => `
+        <div class="card" style="margin-bottom:8px;padding:14px;">
+          <div style="margin-bottom:4px;">${esc(n.text)}</div>
+          <div class="muted">${fmtTime(n.createdAt)} · sent to ${n.targetUids ? n.targetUids.length : 0} recipient(s)</div>
+        </div>`).join('');
+    }, (e) => { const hist=document.getElementById('notif-history'); if(hist) hist.innerHTML = `<p class="muted">Couldn't load history (${esc(e.message)}).</p>`; });
+    track(unsub);
+  }
+
+  MHP.toggleAllNotifCheckboxes = function(type, checked){
+    const selector = type==='student' ? '.notif-cb-student' : type==='mentor' ? '.notif-cb-mentor' : '.notif-cb';
+    document.querySelectorAll(selector).forEach(cb => { cb.checked = checked; });
+  };
+
+  MHP.sendNotification = async function(){
+    const text = document.getElementById('notif-text').value.trim();
+    const errBox = document.getElementById('notif-err');
+    const btn = document.getElementById('send-notif-btn');
+    errBox.innerHTML = '';
+    const targetUids = Array.from(document.querySelectorAll('.notif-cb:checked')).map(cb => cb.value);
+    if(!text){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Write a message first.</div>'; return; }
+    if(targetUids.length===0){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Select at least one recipient.</div>'; return; }
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try{
+      await addDoc(collection(fs,'notifications'), { text, targetUids, createdAt: serverTimestamp(), createdBy: S.uid });
+      document.getElementById('notif-text').value = '';
+      document.querySelectorAll('.notif-cb').forEach(cb => { cb.checked = false; });
+      btn.disabled=false; btn.textContent='Send notification';
+    }catch(e){
+      errBox.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">${esc(e.message)}</div>`;
+      btn.disabled=false; btn.textContent='Send notification';
+    }
+  };
+
   // ---------- shared nav ----------
   MHP.go = function(view){ S.view = view; render(); };
-  MHP.goToStudentChat = function(){ S.view='studentMain'; S.tab='chat'; render(); };
+  MHP.enterStudentApp = function(){ S.view='studentMain'; S.tab='info'; render(); };
   MHP.setTab = function(tab){ S.tab = tab; render(); };
   MHP.setAdminTab = function(tab){ S.adminTab = tab; render(); };
   MHP.logout = async function(){
@@ -1127,10 +1484,12 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         const sSnap = await getDoc(doc(fs,'students',user.uid));
         if(sSnap.exists()){
           S.role='student'; S.uid=user.uid; S.profile=sSnap.data(); S.view='studentMain'; S.tab='chat';
+          await checkChatToast();
         } else {
           const mSnap = await getDoc(doc(fs,'mentors',user.uid));
           if(mSnap.exists()){
             S.role='mentor'; S.uid=user.uid; S.profile=mSnap.data(); S.view='mentorHome'; S.tab='mentees';
+            await checkChatToast();
           } else {
             // Not admin, no student doc, no mentor doc: an interrupted signup. Sign out and let them retry cleanly.
             await signOut(auth); S.view='landing';
@@ -1147,3 +1506,5 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
   render(); // shows the boot spinner until onAuthStateChanged fires
 })();
 </script>
+</body>
+</html>
