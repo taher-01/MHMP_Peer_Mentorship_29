@@ -783,6 +783,13 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
 
     const revealTargets = c.querySelectorAll('.info-block, .info-cta');
     const navPills = c.querySelectorAll('.info-nav-pill');
+    // Content should never be stuck invisible — reveal the section that's on screen right
+    // now immediately (not just on the next scroll event), and as a safety net, force
+    // everything visible shortly after load regardless, in case detection never fires.
+    revealTargets.forEach(b => {
+      const r = b.getBoundingClientRect();
+      if(r.top < window.innerHeight && r.bottom > 0) b.classList.add('is-visible');
+    });
     if('IntersectionObserver' in window){
       // Two-way: reveal when a section scrolls into view, fade back out when it scrolls away —
       // so the effect replays whichever direction the person is scrolling.
@@ -793,12 +800,13 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
             navPills.forEach(pill => pill.classList.toggle('active', pill.dataset.target===en.target.id));
           }
         });
-      }, { threshold: 0.18 });
+      }, { threshold: 0.08 });
       revealTargets.forEach(b => io.observe(b));
       track(() => io.disconnect());
     } else {
       revealTargets.forEach(b => b.classList.add('is-visible'));
     }
+    setTimeout(() => { revealTargets.forEach(b => b.classList.add('is-visible')); }, 1500);
     // Subtle parallax on the hero as the page scrolls.
     const heroEl = c.querySelector('.info-hero-pro');
     if(heroEl){
