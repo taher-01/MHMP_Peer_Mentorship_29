@@ -505,11 +505,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     }catch(e){}
   }
   function brandMark(){
-    return `<div style="display:flex;align-items:center;gap:2px;font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1;">
-      <span style="color:var(--primary);">M</span>
-      <span style="position:relative;color:var(--primary-light);">H<span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--accent);"></span></span>
-      <span style="color:var(--primary);">MP</span>
-    </div>`;
+    return `<img src="Pic/MHMP Logo.png" alt="MHMP Logo" style="display:block;max-width:100%;height:40px;object-fit:contain;"/>`;
   }
 
   function renderBoot(){
@@ -927,25 +923,27 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
   function renderStudentIssueTab(p){
     const c = document.getElementById('student-tab-content');
     c.innerHTML = `
-      <div class="card" style="max-width:640px;">
-        <h3>Report an issue to management</h3>
-        <p class="muted">This goes directly to program management, not your mentor — still fully anonymous on their end, shown only as ${esc(p.anonName)}. If you're in crisis or unsafe right now, please also reach out to a trusted adult or local emergency services immediately.</p>
-        <div class="field" style="margin-top:16px;">
-          <label>What's this about?</label>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            ${ISSUE_CATEGORIES.map(cat => `
-              <div onclick="MHP.selectIssueCategory('${cat.key}')" style="cursor:pointer;padding:12px 14px;border-radius:10px;border:1px solid ${S.issueCategory===cat.key?'var(--primary)':'var(--border)'};background:${S.issueCategory===cat.key?'var(--primary-tint)':'#fff'};">
-                <div style="font-weight:600;font-size:14px;color:${S.issueCategory===cat.key?'var(--primary-dark)':'var(--ink)'};">${cat.label}</div>
-                <div class="muted" style="font-size:12.5px;">${cat.hint}</div>
-              </div>`).join('')}
+      <div style="max-width:640px;margin:0 auto;">
+        <div class="card">
+          <h3>Report an issue to management</h3>
+          <p class="muted">This goes directly to program management, not your mentor — still fully anonymous on their end, shown only as ${esc(p.anonName)}. If you're in crisis or unsafe right now, please also reach out to a trusted adult or local emergency services immediately.</p>
+          <div class="field" style="margin-top:16px;">
+            <label>What's this about?</label>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              ${ISSUE_CATEGORIES.map(cat => `
+                <div onclick="MHP.selectIssueCategory('${cat.key}')" style="cursor:pointer;padding:12px 14px;border-radius:10px;border:1px solid ${S.issueCategory===cat.key?'var(--primary)':'var(--border)'};background:${S.issueCategory===cat.key?'var(--primary-tint)':'#fff'};">
+                  <div style="font-weight:600;font-size:14px;color:${S.issueCategory===cat.key?'var(--primary-dark)':'var(--ink)'};">${cat.label}</div>
+                  <div class="muted" style="font-size:12.5px;">${cat.hint}</div>
+                </div>`).join('')}
+            </div>
           </div>
+          <div class="field"><label>Details</label><textarea id="issue-text" rows="3" placeholder="Add details that would help management understand…"></textarea></div>
+          <button class="btn-primary" onclick="MHP.submitIssue()">Submit</button>
         </div>
-        <div class="field"><label>Details ${S.issueCategory==='other' ? '' : '(optional)'}</label><textarea id="issue-text" rows="3" placeholder="Add any details that would help management understand…"></textarea></div>
-        <button class="btn-primary" onclick="MHP.submitIssue()">Submit</button>
-      </div>
-      <div style="max-width:640px;margin-top:22px;">
-        <h3 style="font-size:15px;">Your previous reports</h3>
-        <div id="my-issues"><p class="muted">Loading…</p></div>
+        <div style="margin-top:22px;">
+          <h3 style="font-size:15px;">Your previous reports</h3>
+          <div id="my-issues"><p class="muted">Loading…</p></div>
+        </div>
       </div>`;
     const q = query(collection(fs,'issues'), where('studentUid','==',S.uid));
     const unsub = onSnapshot(q, (qs) => {
@@ -972,7 +970,7 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     const ta = document.getElementById('issue-text');
     const text = ta.value.trim();
     if(!S.issueCategory){ alert('Choose what this is about first.'); return; }
-    if(S.issueCategory==='other' && !text){ alert('Add a few details so management knows what you mean.'); return; }
+    if(!text){ alert('Add a few details so management knows what you mean.'); return; }
     try{
       await addDoc(collection(fs,'issues'), {
         studentUid: S.uid, anonName: S.profile.anonName, category: S.issueCategory, text, ts: serverTimestamp(), status:'open'
