@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover"/>
+<title>Mental Health Mentorship Program</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -15,118 +21,239 @@
     --accent-tint:#FDF0DC;
     --danger:#B24A3E;
     --danger-tint:#F6E4E0;
-    --border:#DFDAEC;
+    --border:#E4DFF0;
     --bubble-me:#4E2E84;
     --bubble-them:#EFEDF8;
+    --grad-primary:linear-gradient(135deg,#5B3796 0%,#432571 100%);
+    --grad-accent:linear-gradient(135deg,#F8B85A 0%,#F09B2E 100%);
+    --shadow-sm:0 1px 2px rgba(56,32,97,.06), 0 1px 1px rgba(56,32,97,.04);
+    --shadow-md:0 6px 16px rgba(56,32,97,.08), 0 2px 6px rgba(56,32,97,.05);
+    --shadow-lg:0 16px 40px rgba(56,32,97,.14), 0 4px 12px rgba(56,32,97,.06);
+    --shadow-glow:0 0 0 4px rgba(78,46,132,.1);
   }
   *{box-sizing:border-box;}
   #mhp-root{
     font-family:'Inter',sans-serif;
     color:var(--ink);
-    background:var(--bg);
+    background:
+      radial-gradient(900px 480px at 12% -8%, rgba(147,132,214,.16), transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, rgba(246,169,60,.10), transparent 55%),
+      var(--bg);
     min-height:100vh;
     width:100%;
     display:flex;
     flex-direction:column;
     font-size:15px;
     line-height:1.5;
+    -webkit-font-smoothing:antialiased;
   }
   #mhp-root h1,#mhp-root h2,#mhp-root h3{
     font-family:'Fraunces',serif;
     font-weight:500;
     margin:0 0 6px 0;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.015em;
   }
-  #mhp-root .shell{max-width:1080px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;}
+  #mhp-root .shell{max-width:1080px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;animation:mhpfadein .35s ease;}
+  @keyframes mhpfadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
   #mhp-root button{
     font-family:'Inter',sans-serif;
     cursor:pointer;
     border:none;
-    border-radius:10px;
+    border-radius:11px;
     padding:11px 18px;
     font-size:14px;
     font-weight:600;
-    transition:transform .08s ease, opacity .15s ease;
+    transition:transform .12s cubic-bezier(.2,.9,.3,1.2), box-shadow .18s ease, background .18s ease, opacity .15s ease;
   }
   #mhp-root button:disabled{opacity:.55;cursor:default;}
-  #mhp-root button:active{transform:scale(0.97);}
-  #mhp-root .btn-primary{background:var(--primary);color:#fff;}
-  #mhp-root .btn-primary:hover{background:var(--primary-dark);}
-  #mhp-root .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--border);}
-  #mhp-root .btn-ghost:hover{background:var(--surface);}
-  #mhp-root .btn-danger{background:var(--danger);color:#fff;}
+  #mhp-root button:active{transform:scale(0.96);}
+  #mhp-root .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:var(--shadow-sm);}
+  #mhp-root .btn-primary:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+  #mhp-root .btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--border);}
+  #mhp-root .btn-ghost:hover{background:var(--surface);border-color:var(--primary-light);color:var(--primary-dark);}
+  #mhp-root .btn-danger{background:var(--danger);color:#fff;box-shadow:var(--shadow-sm);}
   #mhp-root input, #mhp-root textarea{
     font-family:'Inter',sans-serif;
     font-size:14px;
     padding:11px 13px;
-    border-radius:9px;
+    border-radius:10px;
     border:1px solid var(--border);
     background:#fff;
     width:100%;
     color:var(--ink);
+    transition:box-shadow .15s ease, border-color .15s ease;
   }
-  #mhp-root input:focus, #mhp-root textarea:focus{outline:2px solid var(--primary);outline-offset:1px;}
+  #mhp-root input:focus, #mhp-root textarea:focus{outline:none;border-color:var(--primary);box-shadow:var(--shadow-glow);}
   #mhp-root label{font-size:13px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:5px;}
   #mhp-root .field{margin-bottom:14px;}
-  #mhp-root .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;}
+  #mhp-root .card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm);transition:box-shadow .2s ease;}
   #mhp-root .muted{color:var(--ink-soft);font-size:13.5px;}
-  #mhp-root a.linklike{color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;}
+  #mhp-root a.linklike{color:var(--primary);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
   #mhp-root .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;}
   #mhp-root .pill-open{background:var(--danger-tint);color:var(--danger);}
   #mhp-root .pill-resolved{background:var(--primary-tint);color:var(--primary-dark);}
   #mhp-root .topbar{
     display:flex;align-items:center;justify-content:space-between;
-    padding:14px 24px;border-bottom:1px solid var(--border);background:#fff;
+    padding:13px 22px;margin:14px 18px 12px;border-radius:18px;
+    border:1px solid var(--border);background:rgba(255,255,255,.78);
+    backdrop-filter:blur(10px);box-shadow:var(--shadow-md);
+    position:sticky;top:14px;z-index:10;
   }
   #mhp-root .topbar .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;}
-  #mhp-root .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+  #mhp-root .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(246,169,60,.22);}
   #mhp-root .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);background:#fff;padding:0 24px;}
-  #mhp-root .tab{padding:14px 6px;margin-right:22px;font-weight:600;font-size:14px;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;}
+  #mhp-root .tab{padding:14px 6px;margin-right:22px;font-weight:600;font-size:14px;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;transition:color .15s ease, border-color .15s ease;}
+  #mhp-root .tab:hover{color:var(--primary-dark);}
   #mhp-root .tab.active{color:var(--primary-dark);border-bottom-color:var(--primary);}
   #mhp-root .content{flex:1;padding:26px 24px;display:flex;flex-direction:column;}
   #mhp-root .centerbox{max-width:420px;margin:48px auto;width:100%;}
   #mhp-root .msg-row{display:flex;margin-bottom:9px;}
   #mhp-root .msg-row.me{justify-content:flex-end;}
-  #mhp-root .bubble{max-width:70%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.42;}
-  #mhp-root .bubble.me{background:var(--bubble-me);color:#fff;border-bottom-right-radius:4px;}
-  #mhp-root .bubble.them{background:var(--bubble-them);color:var(--ink);border-bottom-left-radius:4px;}
+  #mhp-root .bubble{max-width:70%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.42;box-shadow:var(--shadow-sm);}
+  #mhp-root .bubble.me{background:var(--grad-primary);color:#fff;border-bottom-right-radius:4px;}
+  #mhp-root .bubble.them{background:var(--bubble-them);color:var(--ink);border-bottom-left-radius:4px;box-shadow:none;border:1px solid var(--border);}
   #mhp-root .bubble .ts{display:block;font-size:10.5px;margin-top:4px;opacity:.65;}
-  #mhp-root .chat-panel{display:flex;flex-direction:column;height:60vh;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
-  #mhp-root .chat-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);}
+  #mhp-root .chat-panel{display:flex;flex-direction:column;height:60vh;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff;box-shadow:var(--shadow-md);}
+  #mhp-root .chat-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#fff,var(--surface));}
   #mhp-root .chat-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;}
-  #mhp-root .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);}
+  #mhp-root .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:#fff;}
   #mhp-root .chat-input input{flex:1;}
-  #mhp-root .mentee-item{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;background:#fff;}
-  #mhp-root .mentee-item:hover{border-color:var(--primary);}
-  #mhp-root .mentee-item.active{border-color:var(--primary);background:var(--primary-tint);}
+  #mhp-root .mentee-item{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid var(--border);border-radius:13px;margin-bottom:8px;cursor:pointer;background:#fff;transition:border-color .15s ease, box-shadow .15s ease, transform .12s ease;}
+  #mhp-root .mentee-item:hover{border-color:var(--primary-light);box-shadow:var(--shadow-sm);transform:translateY(-1px);}
+  #mhp-root .mentor-chats-layout{display:flex;gap:18px;}
+  #mhp-root .mentor-chats-sidebar{width:220px;flex-shrink:0;}
+  #mhp-root .admin-chats-layout{display:flex;gap:18px;}
+  #mhp-root .admin-chats-col{width:190px;flex-shrink:0;}
+  #mhp-root .two-col-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  #mhp-root .mentee-item.active{border-color:var(--primary);background:var(--primary-tint);box-shadow:var(--shadow-sm);}
   #mhp-root table{width:100%;border-collapse:collapse;font-size:13.5px;}
   #mhp-root th{text-align:left;color:var(--ink-soft);font-weight:600;padding:9px 10px;border-bottom:1px solid var(--border);font-size:12.5px;text-transform:none;}
   #mhp-root td{padding:10px 10px;border-bottom:1px solid var(--surface-2);}
+  #mhp-root tr:hover td{background:var(--surface);}
   #mhp-root .role-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:760px;margin:40px auto;}
-  #mhp-root .role-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 20px;text-align:left;cursor:pointer;transition:border-color .15s;}
-  #mhp-root .role-card:hover{border-color:var(--primary);}
+  #mhp-root .role-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px 20px;text-align:left;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease, transform .2s cubic-bezier(.2,.9,.3,1.2);box-shadow:var(--shadow-sm);position:relative;overflow:hidden;}
+  #mhp-root .role-card::before{content:"";position:absolute;inset:0;background:var(--grad-primary);opacity:0;transition:opacity .2s ease;z-index:0;}
+  #mhp-root .role-card:hover{border-color:transparent;box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+  #mhp-root .role-card:hover::before{opacity:1;}
+  #mhp-root .role-card > *{position:relative;z-index:1;}
+  #mhp-root .role-card:hover h3, #mhp-root .role-card:hover p{color:#fff;}
   #mhp-root .empty{padding:40px 20px;text-align:center;color:var(--ink-soft);}
-  #mhp-root .hint{background:var(--primary-tint);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:12.5px;color:var(--primary-dark);margin-bottom:16px;}
+  #mhp-root .hint{background:var(--primary-tint);border:1px solid var(--border);border-radius:12px;padding:10px 13px;font-size:12.5px;color:var(--primary-dark);margin-bottom:16px;}
+  #mhp-root .banner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--accent-tint);border-bottom:1px solid var(--border);padding:10px 24px;font-size:13.5px;color:var(--primary-dark);}
+  #mhp-root .banner-admin{background:var(--primary-tint);border-bottom:1px solid var(--border);border-left:4px solid var(--primary);align-items:flex-start;padding:14px 24px;}
+  #mhp-root .announcement-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary);margin-bottom:3px;}
   #mhp-root .anon-badge{font-family:'Fraunces',serif;font-weight:600;font-size:16px;}
   #mhp-root .spinner{width:22px;height:22px;border-radius:50%;border:3px solid var(--surface-2);border-top-color:var(--primary);animation:mhpspin .7s linear infinite;margin:0 auto;}
+  #mhp-root .info-hero-pro{text-align:center;padding:48px 20px 30px;transition:transform .1s linear;position:relative;z-index:1;}
+  #mhp-root .info-page{margin:-26px -24px;position:relative;overflow:hidden;}
+  #mhp-root .info-blob{position:absolute;border-radius:50%;filter:blur(64px);pointer-events:none;opacity:.4;z-index:0;}
+  #mhp-root .info-blob-1{width:340px;height:340px;background:radial-gradient(circle,var(--primary-light),transparent 70%);top:-100px;left:-100px;animation:blobFloat1 19s ease-in-out infinite;}
+  #mhp-root .info-blob-2{width:280px;height:280px;background:radial-gradient(circle,var(--accent),transparent 70%);top:38%;right:-110px;animation:blobFloat2 23s ease-in-out infinite;}
+  #mhp-root .info-blob-3{width:300px;height:300px;background:radial-gradient(circle,var(--primary),transparent 70%);bottom:-80px;left:18%;animation:blobFloat3 27s ease-in-out infinite;}
+  @keyframes blobFloat1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(50px,60px) scale(1.15);}}
+  @keyframes blobFloat2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-40px,50px) scale(.9);}}
+  @keyframes blobFloat3{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-40px) scale(1.1);}}
+  #mhp-root .info-kicker{position:relative;display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;padding-bottom:9px;}
+  #mhp-root .info-kicker::after{content:"";position:absolute;left:0;bottom:0;width:26px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,.84,.44,1) .18s;}
+  #mhp-root .info-block.is-visible .info-kicker::after{transform:scaleX(1);}
+  #mhp-root .info-block{position:relative;z-index:1;padding:58px 24px;opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,.84,.44,1), transform .8s cubic-bezier(.16,.84,.44,1);}
+  #mhp-root .info-block.is-visible{opacity:1;transform:translateY(0);}
+  #mhp-root .info-block-inner{max-width:760px;margin:0 auto;}
+  #mhp-root .info-block h2{font-size:24px;margin-bottom:12px;}
+  #mhp-root .info-block h3{font-size:17px;margin-bottom:8px;}
+  #mhp-root .info-block p{color:var(--ink-soft);line-height:1.8;font-size:14.5px;margin:0;}
+  #mhp-root .info-block h2 .rw, #mhp-root .info-block h3 .rw{display:inline-block;opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.16,.84,.44,1), transform .55s cubic-bezier(.16,.84,.44,1);}
+  #mhp-root .info-block.is-visible h2 .rw, #mhp-root .info-block.is-visible h3 .rw{opacity:1;transform:translateY(0);}
+  #mhp-root .info-row{display:grid;grid-template-columns:180px 1fr;gap:44px;align-items:center;}
+  #mhp-root .info-row.info-row-reverse{grid-template-columns:1fr 180px;}
+  #mhp-root .info-row.info-row-reverse .info-visual{order:2;}
+  #mhp-root .info-visual{display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.82);transition:opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);}
+  #mhp-root .info-block.is-visible .info-visual{opacity:1;transform:scale(1);}
+  #mhp-root .info-visual svg{width:100%;height:auto;max-width:150px;}
+  #mhp-root .info-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  #mhp-root .info-split-icon{width:34px;height:34px;margin-bottom:10px;opacity:0;transform:scale(.7);transition:opacity .6s cubic-bezier(.16,.84,.44,1), transform .6s cubic-bezier(.16,.84,.44,1);}
+  #mhp-root .info-block.is-visible .info-split-icon{opacity:1;transform:scale(1);}
+  #mhp-root .info-split > div:first-child{opacity:0;transform:translateX(-26px);transition:opacity .75s cubic-bezier(.16,.84,.44,1) .08s, transform .75s cubic-bezier(.16,.84,.44,1) .08s;}
+  #mhp-root .info-split > div:last-child{opacity:0;transform:translateX(26px);transition:opacity .75s cubic-bezier(.16,.84,.44,1) .08s, transform .75s cubic-bezier(.16,.84,.44,1) .08s;}
+  #mhp-root .info-block.is-visible .info-split > div:first-child,
+  #mhp-root .info-block.is-visible .info-split > div:last-child{opacity:1;transform:translateX(0);}
+  #mhp-root .info-process{display:flex;align-items:flex-start;justify-content:center;gap:0;margin:30px 0 6px;}
+  #mhp-root .info-process-step{display:flex;flex-direction:column;align-items:center;gap:11px;width:150px;}
+  #mhp-root .info-process-circle{width:54px;height:54px;border-radius:50%;background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:20px;font-weight:600;box-shadow:var(--shadow-sm);flex-shrink:0;}
+  #mhp-root .info-process-label{font-size:12.5px;color:var(--ink-soft);text-align:center;line-height:1.4;}
+  #mhp-root .info-process-line{flex:1;max-width:90px;height:2px;background:var(--border);position:relative;top:27px;transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.16,.84,.44,1) .35s;}
+  #mhp-root .info-block.is-visible .info-process-line{transform:scaleX(1);}
+  #mhp-root .info-nav{position:relative;z-index:1;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 20px 8px;}
+  #mhp-root .info-nav-pill{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink-soft);background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 16px;cursor:pointer;transition:all .25s cubic-bezier(.16,.84,.44,1);}
+  #mhp-root .info-nav-pill:hover{border-color:var(--primary-light);color:var(--primary-dark);transform:translateY(-1px);}
+  #mhp-root .info-nav-pill.active{background:var(--grad-primary);color:#fff;border-color:transparent;animation:pillPulse 2.6s ease-in-out infinite;}
+  @keyframes pillPulse{0%,100%{box-shadow:0 0 0 0 rgba(78,46,132,.18);}50%{box-shadow:0 0 0 7px rgba(78,46,132,0);}}
+  #mhp-root .info-cta{position:relative;z-index:1;text-align:center;padding:60px 24px 20px;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);}
+  #mhp-root .info-cta.is-visible{opacity:1;transform:translateY(0);}
+  #mhp-root .info-cta h2{font-size:22px;margin-bottom:10px;}
+  #mhp-root .info-cta p{color:var(--ink-soft);margin-bottom:20px;}
+  #mhp-root .info-cta .btn-primary{animation:ctaGlow 3.2s ease-in-out infinite;}
+  @keyframes ctaGlow{0%,100%{box-shadow:var(--shadow-sm);}50%{box-shadow:0 0 0 9px rgba(78,46,132,.07), var(--shadow-md);}}
+  @media (max-width:640px){
+    #mhp-root .info-split{grid-template-columns:1fr;gap:30px;}
+    #mhp-root .info-block{padding:40px 20px;}
+    #mhp-root .info-nav{padding:0 16px 6px;}
+    #mhp-root .info-blob{display:none;}
+    #mhp-root .info-row, #mhp-root .info-row.info-row-reverse{grid-template-columns:1fr;text-align:center;gap:18px;}
+    #mhp-root .info-row.info-row-reverse .info-visual{order:0;}
+    #mhp-root .info-visual svg{max-width:110px;}
+    #mhp-root .info-process{flex-direction:column;gap:18px;}
+    #mhp-root .info-process-line{display:none;}
+  }
   @keyframes mhpspin{to{transform:rotate(360deg);}}
   @media (max-width:640px){
-    #mhp-root .role-grid{grid-template-columns:1fr;}
+    #mhp-root .role-grid{grid-template-columns:1fr;margin:24px auto;}
     #mhp-root .bubble{max-width:85%;}
+    #mhp-root .mentor-chats-layout,
+    #mhp-root .admin-chats-layout{flex-direction:column;}
+    #mhp-root .mentor-chats-sidebar,
+    #mhp-root .admin-chats-col{width:100%;}
+    #mhp-root .two-col-form{grid-template-columns:1fr;}
+    #mhp-root .topbar{padding:11px 16px;margin:10px 10px 10px;border-radius:15px;top:10px;flex-wrap:wrap;row-gap:8px;}
+    #mhp-root .topbar .brand{font-size:17px;}
+    #mhp-root .tabs{padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    #mhp-root .tab{margin-right:16px;padding:12px 4px;white-space:nowrap;font-size:13.5px;}
+    #mhp-root .content{padding:16px;}
+    #mhp-root .info-page{margin:-16px -16px;}
+    #mhp-root .banner{padding:10px 16px;}
+    #mhp-root .banner-admin{padding:12px 16px;}
+    #mhp-root .centerbox{margin:20px auto;}
+    #mhp-root .card{padding:18px;}
+    #mhp-root .role-card{padding:20px 16px;}
+    #mhp-root h1{font-size:24px !important;}
+    #mhp-root h2{font-size:20px;}
+    #mhp-root button{padding:12px 16px;min-height:44px;}
+    #mhp-root input, #mhp-root textarea, #mhp-root select{padding:12px;font-size:16px;min-height:44px;}
+    #mhp-root textarea{min-height:100px;}
+    #mhp-root .chat-panel{height:calc(100dvh - 190px);border-radius:12px;}
+    #mhp-root table{font-size:12.5px;}
+    #mhp-root th, #mhp-root td{padding:8px 6px;}
   }
+  @media (max-width:380px){
+    #mhp-root .topbar .brand{font-size:15px;}
+    #mhp-root h1{font-size:21px !important;}
+  }
+  html,body{margin:0;padding:0;}
 </style>
+</head>
+<body>
 
 <div id="mhp-root"></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
   signOut, onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where,
-  onSnapshot, orderBy, serverTimestamp, runTransaction
+  getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc, collection, query, where,
+  onSnapshot, orderBy, limit, serverTimestamp, runTransaction, increment, documentId, arrayUnion
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ---------- Firebase project config ----------
@@ -148,13 +275,17 @@ const STUDENT_DOMAIN = "students.mhmp-peer-mentorship.local";
 const MENTOR_DOMAIN  = "mentors.mhmp-peer-mentorship.local";
 // The one admin account, created manually in the Firebase console (see setup notes).
 const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
+// TODO: replace with your real WhatsApp group invite link before sharing with students/mentors.
+const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
 
 (function(){
+  window.MHP = window.MHP || {};
   const root = document.getElementById('mhp-root');
 
-  let S = { view:'boot', role:null, uid:null, profile:null, tab:'chat', adminTab:'users',
+  let S = { view:'boot', role:null, uid:null, profile:null, tab:'chat', adminTab:'students',
             activeMenteeUid:null, adminActiveMentor:null, adminActiveMentee:null, issueCategory:null,
-            authBusy:false };
+            authBusy:false, showAddStudents:false, showAddMentor:false, showSendNotif:false,
+            toast:null, adminNotifs:[], notifRecipients:{ boys:[], girls:[], mentorsBoy:[], mentorsGirl:[] } };
 
   let liveUnsubs = [];
   function clearLiveListeners(){ liveUnsubs.forEach(u => { try{u();}catch(e){} }); liveUnsubs = []; }
@@ -170,9 +301,58 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
   }
   function pairKey(studentUid, mentorUid){ return studentUid + '_' + mentorUid; }
 
+  // --- unread tracking: a lightweight parent doc at messages/{pairKey} holds
+  // lastMessageTs, plus a per-side unread COUNT that increments when the other side
+  // sends a message and resets to 0 when that side opens the conversation.
+  async function markRead(key, readField, unreadField){
+    try{ await setDoc(doc(fs,'messages',key), { [readField]: serverTimestamp(), [unreadField]: 0 }, { merge:true }); }catch(e){}
+  }
+  async function bumpLastMessage(key, senderReadField, senderUnreadField, otherUnreadField){
+    try{
+      await setDoc(doc(fs,'messages',key), {
+        lastMessageTs: serverTimestamp(),
+        [senderReadField]: serverTimestamp(),
+        [senderUnreadField]: 0,
+        [otherUnreadField]: increment(1)
+      }, { merge:true });
+    }catch(e){}
+  }
+  function chunk(arr, size){
+    const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out;
+  }
+  function unreadCountOf(data, unreadField){
+    return (data && data[unreadField]) || 0;
+  }
+  // Watches unread counts for a batch of pairKeys at once; calls cb with a { pairKey: number } map
+  // on every change. Chunked into groups of 30 (Firestore's "in" query limit).
+  function watchUnread(pairKeys, unreadField, cb){
+    if(pairKeys.length===0){ cb({}); return ()=>{}; }
+    const groups = chunk(pairKeys, 30);
+    const state = {};
+    const unsubs = groups.map(g => {
+      const q = query(collection(fs,'messages'), where(documentId(),'in',g));
+      return onSnapshot(q, (qs) => {
+        g.forEach(k => { state[k] = 0; });
+        qs.docs.forEach(d => { state[d.id] = unreadCountOf(d.data(), unreadField); });
+        cb({...state});
+      });
+    });
+    return () => unsubs.forEach(u=>u());
+  }
+  function unreadBadge(count){
+    if(!count || count<=0) return '';
+    return `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;margin-left:6px;vertical-align:middle;">${count>99?'99+':count}</span>`;
+  }
+
   function studentEmail(id){ return id.toLowerCase() + '@' + STUDENT_DOMAIN; }
   function mentorEmail(slug){ return slug + '@' + MENTOR_DOMAIN; }
   function slugify(name){ return name.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'mentor'; }
+  const PASSWORD_CHARS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789"; // no 0/O/1/I/l
+  function genPassword(len=8){
+    let p = '';
+    for(let i=0;i<len;i++) p += PASSWORD_CHARS[Math.floor(Math.random()*PASSWORD_CHARS.length)];
+    return p;
+  }
 
   // ---------- generic error helper ----------
   function friendlyAuthError(e){
@@ -185,36 +365,38 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     return e && e.message ? e.message : 'Something went wrong. Please try again.';
   }
 
-  // ---------- transactional counters doc: mentor round robin + used anon names ----------
-  async function signupCounters(){
+  // ---------- transactional counters doc: just keeps anonymous names unique ----------
+  async function pickAnonName(){
     const ref = doc(fs, 'meta', 'counters');
     return await runTransaction(fs, async (tx) => {
       const snap = await tx.get(ref);
-      const data = snap.exists() ? snap.data() : { mentorOrder:[], nextIdx:0, usedNames:[] };
+      const data = snap.exists() ? snap.data() : { usedNames:[] };
       const used = new Set(data.usedNames || []);
       let name;
       do { name = 'Anonymous' + String(Math.floor(1000 + Math.random()*9000)); } while (used.has(name));
-      let mentorUid = null;
-      const order = data.mentorOrder || [];
-      let nextIdx = data.nextIdx || 0;
-      if(order.length > 0){
-        mentorUid = order[nextIdx % order.length];
-        nextIdx = nextIdx + 1;
-      }
-      tx.set(ref, { mentorOrder: order, nextIdx, usedNames: [...used, name] });
-      return { anonName: name, mentorUid };
+      tx.set(ref, { usedNames: [...used, name] });
+      return name;
     });
   }
 
-  async function registerMentorInOrder(uid){
-    const ref = doc(fs, 'meta', 'counters');
-    await runTransaction(fs, async (tx) => {
-      const snap = await tx.get(ref);
-      const data = snap.exists() ? snap.data() : { mentorOrder:[], nextIdx:0, usedNames:[] };
-      const order = data.mentorOrder || [];
-      if(!order.includes(uid)) order.push(uid);
-      tx.set(ref, { mentorOrder: order, nextIdx: data.nextIdx || 0, usedNames: data.usedNames || [] });
-    });
+  // Finds the mentor of the given gender currently assigned the fewest mentees,
+  // then atomically bumps their count. Returns null if no mentor of that gender exists yet.
+  async function assignLeastLoadedMentor(gender){
+    const q = query(collection(fs,'mentors'), where('gender','==',gender), orderBy('menteeCount','asc'), limit(1));
+    const qs = await getDocs(q);
+    if(qs.empty) return null;
+    const mentorUid = qs.docs[0].id;
+    await updateDoc(doc(fs,'mentors',mentorUid), { menteeCount: increment(1) });
+    return mentorUid;
+  }
+
+  function findGender(nameOrId, whitelistData){
+    const target = String(nameOrId).trim().toLowerCase();
+    const boys = (whitelistData.boys || []).map(x => String(x).trim().toLowerCase());
+    const girls = (whitelistData.girls || []).map(x => String(x).trim().toLowerCase());
+    if(boys.includes(target)) return 'boy';
+    if(girls.includes(target)) return 'girl';
+    return null;
   }
 
   // ---------- render dispatch ----------
@@ -233,11 +415,93 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     renderLanding();
   }
 
-  function topbar(title, onBack){
+  function topbar(title, onBack, showWhatsapp){
     return `<div class="topbar">
       <div class="brand"><span class="dot"></span> ${esc(title)}</div>
-      ${onBack ? `<button class="btn-ghost" onclick="${onBack}">Log out</button>` : ''}
+      <div style="display:flex;align-items:center;gap:10px;">
+        ${showWhatsapp ? whatsappPill() : ''}
+        ${onBack ? `<button class="btn-ghost" onclick="${onBack}">Log out</button>` : ''}
+      </div>
     </div>`;
+  }
+  function whatsappPill(){
+    return `<a href="${WHATSAPP_LINK}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--border);border-radius:999px;padding:6px 12px;white-space:nowrap;">
+      <span style="color:#25D366;font-size:14px;">●</span> WhatsApp updates
+    </a>`;
+  }
+  function renderBanners(){
+    let html = '';
+    if(S.toast){
+      html += `<div class="banner">
+        <span>${esc(S.toast)}</span>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:12px;flex-shrink:0;" onclick="MHP.dismissToast()">Dismiss</button>
+      </div>`;
+    }
+    (S.adminNotifs||[]).forEach(n => {
+      html += `<div class="banner banner-admin">
+        <div style="flex:1;">
+          <div class="announcement-label">Announcement from management</div>
+          <div>${esc(n.text)}</div>
+        </div>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:12px;flex-shrink:0;align-self:flex-start;" onclick="MHP.dismissNotif('${n.id}')">Dismiss</button>
+      </div>`;
+    });
+    return html;
+  }
+  MHP.dismissToast = function(){
+    S.toast = null;
+    const el = document.getElementById('banner-area');
+    if(el) el.innerHTML = renderBanners();
+  };
+  MHP.dismissNotif = async function(id){
+    S.adminNotifs = (S.adminNotifs||[]).filter(n=>n.id!==id);
+    const el = document.getElementById('banner-area');
+    if(el) el.innerHTML = renderBanners();
+    try{
+      const col = S.role==='student' ? 'students' : 'mentors';
+      await updateDoc(doc(fs,col,S.uid), { dismissedNotifs: arrayUnion(id) });
+      S.profile.dismissedNotifs = [...(S.profile.dismissedNotifs||[]), id];
+    }catch(e){}
+  };
+  // Subscribes to broadcast notifications targeted at the current user, filtered against
+  // what they've already dismissed. Call from any screen that should surface them.
+  function watchMyNotifications(){
+    const dismissed = new Set(S.profile.dismissedNotifs || []);
+    const q = query(collection(fs,'notifications'), where('targetUids','array-contains', S.uid));
+    const unsub = onSnapshot(q, (qs) => {
+      const items = qs.docs.filter(d=>!dismissed.has(d.id)).map(d=>({id:d.id, ...d.data()}));
+      items.sort((a,b) => (b.createdAt?.toMillis?.()||0) - (a.createdAt?.toMillis?.()||0));
+      S.adminNotifs = items;
+      const el = document.getElementById('banner-area');
+      if(el) el.innerHTML = renderBanners();
+    });
+    track(unsub);
+  }
+  // One-time check on login/restore: is there already an unread chat message waiting?
+  async function checkChatToast(){
+    try{
+      if(S.role==='student'){
+        if(!S.profile.mentorId) return;
+        const key = pairKey(S.uid, S.profile.mentorId);
+        const msnap = await getDoc(doc(fs,'messages',key));
+        const cnt = unreadCountOf(msnap.exists()?msnap.data():null, 'unreadForStudent');
+        if(cnt>0){
+          const mSnap = await getDoc(doc(fs,'mentors',S.profile.mentorId));
+          const name = mSnap.exists() ? mSnap.data().name : 'Your mentor';
+          S.toast = `${name} sent you ${cnt} new message${cnt>1?'s':''}.`;
+        }
+      } else if(S.role==='mentor'){
+        const menteesSnap = await getDocs(query(collection(fs,'students'), where('mentorId','==',S.uid)));
+        const pairKeys = menteesSnap.docs.map(d => pairKey(d.id, S.uid));
+        if(pairKeys.length===0) return;
+        let total = 0;
+        for(const g of chunk(pairKeys,30)){
+          const qs = await getDocs(query(collection(fs,'messages'), where(documentId(),'in',g)));
+          qs.docs.forEach(d => { total += unreadCountOf(d.data(), 'unreadForMentor'); });
+        }
+        if(total>0) S.toast = `You have ${total} new message${total>1?'s':''} from your mentees.`;
+      }
+    }catch(e){}
   }
   function brandMark(){
     return `<div style="display:flex;align-items:center;gap:2px;font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1;">
@@ -255,7 +519,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
   function renderLanding(){
     root.innerHTML = `
       <div class="shell">
-        <div class="topbar">${brandMark()}</div>
+        <div class="topbar">${brandMark()}${whatsappPill()}</div>
         <div class="content">
           <div style="max-width:640px;margin:36px auto 0;text-align:center;">
             <div style="display:flex;justify-content:center;margin-bottom:18px;">${brandMark()}</div>
@@ -289,9 +553,9 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
         <div class="content">
           <div class="centerbox card">
             <h2>Create your account</h2>
-            <p class="muted" style="margin-bottom:18px;">Use the school ID code you were given. You'll be assigned an anonymous name automatically — your mentor will never see your real identity.</p>
+            <p class="muted" style="margin-bottom:18px;">Use the school ID you were given. You'll be assigned an anonymous name automatically — your mentor will never see your real identity.</p>
             <div id="su-error" class="hint" style="display:none;background:var(--danger-tint);color:var(--danger);"></div>
-            <div class="field"><label>School ID code</label><input id="su-id" placeholder="e.g. S1001" autocomplete="off"/></div>
+            <div class="field"><label>School ID</label><input id="su-id" placeholder="e.g. S1001" autocomplete="off"/></div>
             <div class="field"><label>Create a password</label><input id="su-pw" type="password" placeholder="At least 6 characters" onkeydown="if(event.key==='Enter')MHP.doStudentSignup()"/></div>
             <button class="btn-primary" style="width:100%;" id="su-btn" onclick="MHP.doStudentSignup()">Create account</button>
             <p class="muted" style="margin-top:14px;">Already signed up? <a class="linklike" onclick="MHP.go('studentLogin')">Log in</a></p>
@@ -300,11 +564,8 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
       </div>`;
   }
 
-  window.MHP = window.MHP || {};
-
   MHP.doStudentSignup = async function(){
-    const idRaw = document.getElementById('su-id').value.trim();
-    const id = idRaw.toUpperCase();
+    const id = document.getElementById('su-id').value.trim().toUpperCase();
     const pw = document.getElementById('su-pw').value;
     const err = document.getElementById('su-error');
     const btn = document.getElementById('su-btn');
@@ -313,23 +574,28 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
       err.style.display='block'; err.textContent='Enter your school ID and a password of at least 6 characters.'; return;
     }
     btn.disabled = true; btn.textContent = 'Checking…';
+    S.authBusy = true;
     try{
       const wl = await getDoc(doc(fs,'meta','whitelist'));
-      const ids = wl.exists() ? (wl.data().ids || []) : [];
-      if(!ids.map(x=>String(x).toUpperCase()).includes(id)){
+      const wlData = wl.exists() ? wl.data() : {};
+      const gender = findGender(id, wlData);
+      if(!gender){
         err.style.display='block'; err.textContent="That school ID isn't on the approved list. Check with your program coordinator.";
-        btn.disabled=false; btn.textContent='Create account'; return;
+        btn.disabled=false; btn.textContent='Create account'; S.authBusy=false; return;
       }
       btn.textContent = 'Creating account…';
       const cred = await createUserWithEmailAndPassword(auth, studentEmail(id), pw);
-      const { anonName, mentorUid } = await signupCounters();
+      const anonName = await pickAnonName();
+      const mentorUid = await assignLeastLoadedMentor(gender);
       await setDoc(doc(fs,'students',cred.user.uid), {
-        schoolId: id, anonName, mentorId: mentorUid, createdAt: serverTimestamp()
+        schoolId: id, anonName, gender, mentorId: mentorUid, createdAt: serverTimestamp()
       });
-      S.role='student'; S.uid=cred.user.uid; S.profile={ schoolId:id, anonName, mentorId:mentorUid };
+      S.role='student'; S.uid=cred.user.uid; S.profile={ schoolId:id, anonName, gender, mentorId:mentorUid };
       S.view='studentInfo';
+      S.authBusy = false;
       render();
     }catch(e){
+      S.authBusy = false;
       err.style.display='block'; err.textContent = friendlyAuthError(e);
       btn.disabled=false; btn.textContent='Create account';
     }
@@ -361,19 +627,26 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     err.style.display='none';
     if(!id || !pw){ err.style.display='block'; err.textContent='Enter your school ID and password.'; return; }
     btn.disabled=true; btn.textContent='Logging in…';
+    S.authBusy = true;
     try{
       const cred = await signInWithEmailAndPassword(auth, studentEmail(id), pw);
       let snap = await getDoc(doc(fs,'students',cred.user.uid));
       if(!snap.exists()){
         // Recover from an interrupted signup (auth account created, profile step never finished).
-        const { anonName, mentorUid } = await signupCounters();
-        await setDoc(doc(fs,'students',cred.user.uid), { schoolId:id, anonName, mentorId:mentorUid, createdAt: serverTimestamp() });
+        const wl = await getDoc(doc(fs,'meta','whitelist'));
+        const gender = findGender(id, wl.exists() ? wl.data() : {});
+        const anonName = await pickAnonName();
+        const mentorUid = gender ? await assignLeastLoadedMentor(gender) : null;
+        await setDoc(doc(fs,'students',cred.user.uid), { schoolId:id, anonName, gender, mentorId:mentorUid, createdAt: serverTimestamp() });
         snap = await getDoc(doc(fs,'students',cred.user.uid));
       }
       S.role='student'; S.uid=cred.user.uid; S.profile=snap.data();
-      S.view='studentMain'; S.tab='chat';
+      S.view='studentMain'; S.tab='info';
+      await checkChatToast();
+      S.authBusy = false;
       render();
     }catch(e){
+      S.authBusy = false;
       err.style.display='block'; err.textContent = friendlyAuthError(e);
       btn.disabled=false; btn.textContent='Log in';
     }
@@ -389,7 +662,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
           <div class="centerbox card" style="text-align:center;">
             <h2>Welcome, <span class="anon-badge">${esc(p.anonName)}</span></h2>
             <p class="muted" style="margin:14px 0 20px;">This is your identity in the program — nobody, including your mentor, sees your real name or school ID here. You've been matched with a mentor and can start chatting whenever you're ready. There's also a page to report any issue directly to program management, always anonymously.</p>
-            <button class="btn-primary" style="width:100%;" onclick="S.view='studentMain'; S.tab='chat'; render();">Go to my chat</button>
+            <button class="btn-primary" style="width:100%;" onclick="MHP.enterStudentApp()">Continue</button>
           </div>
         </div>
       </div>`;
@@ -400,16 +673,174 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     const p = S.profile;
     root.innerHTML = `
       <div class="shell">
-        ${topbar(p.anonName, 'MHP.logout()')}
+        ${topbar(p.anonName, 'MHP.logout()', true)}
         <div class="tabs">
-          <div class="tab ${S.tab==='chat'?'active':''}" onclick="MHP.setTab('chat')">Chat with my mentor</div>
+          <div class="tab ${S.tab==='info'?'active':''}" onclick="MHP.setTab('info')">About MHMP</div>
+          <div class="tab ${S.tab==='chat'?'active':''}" onclick="MHP.setTab('chat')">Chat with my mentor<span id="chat-tab-dot"></span></div>
           <div class="tab ${S.tab==='issue'?'active':''}" onclick="MHP.setTab('issue')">Report an issue</div>
         </div>
+        <div id="banner-area">${renderBanners()}</div>
         <div class="content" id="student-tab-content"></div>
       </div>`;
-    if(S.tab==='chat') renderStudentChatTab(p);
+    watchMyNotifications();
+    if(p.mentorId){
+      const key = pairKey(S.uid, p.mentorId);
+      const unsub = onSnapshot(doc(fs,'messages',key), (snap) => {
+        const dotEl = document.getElementById('chat-tab-dot');
+        if(!dotEl) return;
+        const count = S.tab!=='chat' ? unreadCountOf(snap.exists()?snap.data():null, 'unreadForStudent') : 0;
+        dotEl.innerHTML = unreadBadge(count);
+      });
+      track(unsub);
+    }
+    if(S.tab==='info') renderStudentInfoTab(p);
+    else if(S.tab==='chat') renderStudentChatTab(p);
     else renderStudentIssueTab(p);
   }
+
+  function splitWords(text){
+    return text.split(' ').map((w,i) => `<span class="rw" style="transition-delay:${i*45}ms">${esc(w)}&nbsp;</span>`).join('');
+  }
+
+  // Custom line-art icons (brand-colored SVGs), not stock art or emoji.
+  const ICON_CONNECTION = `<svg viewBox="0 0 120 120" fill="none"><circle cx="46" cy="60" r="30" fill="var(--primary-tint)"/><circle cx="76" cy="60" r="30" fill="none" stroke="var(--primary)" stroke-width="2.5"/><circle cx="61" cy="60" r="5" fill="var(--accent)"/></svg>`;
+  const ICON_CHART = `<svg viewBox="0 0 120 120" fill="none"><rect x="18" y="62" width="15" height="40" rx="7" fill="var(--primary-tint)"/><rect x="43" y="40" width="15" height="62" rx="7" fill="var(--primary-light)"/><rect x="68" y="18" width="15" height="84" rx="7" fill="var(--primary)"/><circle cx="94" cy="28" r="6" fill="var(--accent)"/></svg>`;
+  const ICON_BADGE = `<svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="48" r="34" fill="var(--primary-tint)" stroke="var(--primary)" stroke-width="2.5"/><path d="M45 48l10 10 20-20" stroke="var(--primary)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 78l-7 22 23-10 23 10-7-22" fill="var(--accent)" opacity=".85"/></svg>`;
+  const ICON_TARGET = `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="var(--primary)" stroke-width="2"/><circle cx="20" cy="20" r="9" stroke="var(--primary)" stroke-width="2"/><circle cx="20" cy="20" r="3" fill="var(--accent)"/></svg>`;
+  const ICON_HORIZON = `<svg viewBox="0 0 40 40" fill="none"><path d="M4 27a16 16 0 0 1 32 0" stroke="var(--primary)" stroke-width="2"/><circle cx="20" cy="12" r="3.5" fill="var(--accent)"/></svg>`;
+
+  function infoSection(kicker, title, body, icon, opts){
+    opts = opts || {};
+    return `<div class="info-block" id="${opts.id||''}">
+      <div class="info-block-inner">
+        <div class="info-row${opts.reverse ? ' info-row-reverse' : ''}">
+          <div class="info-visual">${icon}</div>
+          <div>
+            <span class="info-kicker">${kicker}</span>
+            <h2>${splitWords(title)}</h2>
+            <p>${body}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  const INFO_NAV = [
+    { id:'info-overview', label:'Overview' },
+    { id:'info-mission', label:'Mission & Vision' },
+    { id:'info-approach', label:'Approach' },
+    { id:'info-training', label:'Training' },
+  ];
+
+  function renderStudentInfoTab(p){
+    const c = document.getElementById('student-tab-content');
+    c.innerHTML = `
+      <div class="info-page">
+        <div class="info-blob info-blob-1"></div>
+        <div class="info-blob info-blob-2"></div>
+        <div class="info-blob info-blob-3"></div>
+
+        <div class="info-hero-pro">
+          <div style="display:flex;justify-content:center;margin-bottom:10px;">${brandMark()}</div>
+          <p class="muted">Supporting the mental wellbeing of Egypt's STEM students</p>
+        </div>
+
+        <nav class="info-nav">
+          ${INFO_NAV.map(n => `<button class="info-nav-pill" data-target="${n.id}" onclick="MHP.scrollToInfoSection('${n.id}')">${n.label}</button>`).join('')}
+        </nav>
+
+        ${infoSection('Overview', 'What is MHMP?', "The Mental Health Mentorship Program is part of the <strong>Mentorship Obour STEM Program (MOSP)</strong>, and supports the mental wellbeing of students across Egypt's STEM schools. Trained mentors lead in-school sessions to help freshman students recognize and navigate the mental health challenges common in the STEM community — early, and with the right words for it.", ICON_CONNECTION, {id:'info-overview'})}
+
+        <div class="info-block" id="info-mission">
+          <div class="info-block-inner">
+            <div class="info-split">
+              <div>
+                <div class="info-split-icon">${ICON_TARGET}</div>
+                <span class="info-kicker">Mission</span>
+                <h3>${splitWords('Raising awareness, improving wellbeing')}</h3>
+                <p class="muted" style="line-height:1.7;">To raise awareness among the next generation of STEM students about mental health, and to actively improve the mental wellbeing of STEM students across Egypt.</p>
+              </div>
+              <div>
+                <div class="info-split-icon">${ICON_HORIZON}</div>
+                <span class="info-kicker">Vision</span>
+                <h3>${splitWords('Achievement and wellbeing, together')}</h3>
+                <p class="muted" style="line-height:1.7;">A future where mental health knowledge reaches every STEM school in Egypt — building a community where achievement and wellbeing grow side by side, never at each other's expense.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        ${infoSection('Our approach', 'Why this approach', 'Before building the program, we ran a survey to understand the mental health challenges STEM students actually face — things like homesickness, burnout, imposter syndrome, and pressure around academic identity. That research shaped the training curriculum every mentor goes through.', ICON_CHART, {id:'info-approach', reverse:true})}
+
+        ${infoSection('Training', 'Who trains our mentors', 'Every mentor is trained and supervised by experienced mental health professionals — clinicians and researchers holding credentials including MSc and PhD-level clinical psychology, and specialized training in psychotherapy and mental health.', ICON_BADGE, {id:'info-training'})}
+
+        <div class="info-cta">
+          <h2>Ready to talk to someone?</h2>
+          <p class="muted">Your mentor is one message away — fully anonymous, whenever you're ready.</p>
+          <button class="btn-primary" id="info-cta-btn" onclick="MHP.setTab('chat')">Go to my chat</button>
+        </div>
+      </div>`;
+
+    const revealTargets = c.querySelectorAll('.info-block, .info-cta');
+    const navPills = c.querySelectorAll('.info-nav-pill');
+    if('IntersectionObserver' in window){
+      // Two-way: reveal when a section scrolls into view, fade back out when it scrolls away —
+      // so the effect replays whichever direction the person is scrolling.
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          en.target.classList.toggle('is-visible', en.isIntersecting);
+          if(en.isIntersecting && en.target.id){
+            navPills.forEach(pill => pill.classList.toggle('active', pill.dataset.target===en.target.id));
+          }
+        });
+      }, { threshold: 0.18 });
+      revealTargets.forEach(b => io.observe(b));
+      track(() => io.disconnect());
+    } else {
+      revealTargets.forEach(b => b.classList.add('is-visible'));
+    }
+    // Subtle parallax on the hero as the page scrolls.
+    const heroEl = c.querySelector('.info-hero-pro');
+    if(heroEl){
+      let ticking = false;
+      const updateParallax = () => {
+        ticking = false;
+        const rect = heroEl.getBoundingClientRect();
+        const offset = Math.max(-24, Math.min(24, rect.top * -0.12));
+        heroEl.style.transform = `translateY(${offset}px)`;
+      };
+      const onScroll = () => { if(!ticking){ ticking = true; requestAnimationFrame(updateParallax); } };
+      window.addEventListener('scroll', onScroll, { passive:true });
+      track(() => window.removeEventListener('scroll', onScroll));
+      updateParallax();
+    }
+    // Magnetic pull on the closing CTA button — it nudges toward the cursor when nearby.
+    const ctaBtn = c.querySelector('#info-cta-btn');
+    if(ctaBtn){
+      const onMove = (e) => {
+        const rect = ctaBtn.getBoundingClientRect();
+        const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+        const dx = e.clientX - cx, dy = e.clientY - cy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const radius = 130;
+        if(dist < radius){
+          const strength = (1 - dist/radius) * 9;
+          ctaBtn.style.transform = `translate(${(dx/dist)*strength||0}px, ${(dy/dist)*strength||0}px)`;
+        } else {
+          ctaBtn.style.transform = 'translate(0,0)';
+        }
+      };
+      window.addEventListener('mousemove', onMove, { passive:true });
+      track(() => window.removeEventListener('mousemove', onMove));
+    }
+  }
+
+  MHP.scrollToInfoSection = function(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 76;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
 
   function renderStudentChatTab(p){
     const c = document.getElementById('student-tab-content');
@@ -423,14 +854,19 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     }
     c.innerHTML = `
       <div class="chat-panel">
-        <div class="chat-header"><div><strong>Your mentor</strong><div class="muted">Anonymous, one-to-one</div></div></div>
+        <div class="chat-header"><div><strong id="chat-mentor-name">Your mentor</strong><div class="muted">You're anonymous to them — they only see your program name</div></div></div>
         <div class="chat-body" id="chat-body"><div class="empty">Loading…</div></div>
         <div class="chat-input">
           <input id="student-msg-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')MHP.sendStudentMsg()"/>
           <button class="btn-primary" onclick="MHP.sendStudentMsg()">Send</button>
         </div>
       </div>`;
+    getDoc(doc(fs,'mentors',p.mentorId)).then(mSnap => {
+      const nameEl = document.getElementById('chat-mentor-name');
+      if(nameEl && mSnap.exists()) nameEl.textContent = mSnap.data().name;
+    }).catch(()=>{});
     const key = pairKey(S.uid, p.mentorId);
+    markRead(key, 'lastReadByStudent', 'unreadForStudent');
     const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
     const unsub = onSnapshot(q, (qs) => {
       const body = document.getElementById('chat-body');
@@ -443,6 +879,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
         </div>`;
       }).join('');
       body.scrollTop = body.scrollHeight;
+      markRead(key, 'lastReadByStudent', 'unreadForStudent');
     }, (e) => {
       const body = document.getElementById('chat-body');
       if(body) body.innerHTML = `<div class="empty">Couldn't load messages (${esc(e.message)}).</div>`;
@@ -451,7 +888,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
   }
 
   MHP.retryAssign = async function(){
-    const { anonName, mentorUid } = await signupCounters().then(r => ({anonName:S.profile.anonName, mentorUid:r.mentorUid}));
+    const mentorUid = await assignLeastLoadedMentor(S.profile.gender);
     if(mentorUid){
       await updateDoc(doc(fs,'students',S.uid), { mentorId: mentorUid });
       S.profile.mentorId = mentorUid;
@@ -467,6 +904,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     const key = pairKey(S.uid, S.profile.mentorId);
     try{
       await addDoc(collection(fs,'messages',key,'thread'), { from:'student', text, ts: serverTimestamp() });
+      await bumpLastMessage(key, 'lastReadByStudent', 'unreadForStudent', 'unreadForMentor');
     }catch(e){ alert('Message failed to send: ' + e.message); }
   };
 
@@ -543,40 +981,39 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
         <div class="content">
           <div class="centerbox card">
             <h2>Mentor sign in</h2>
-            <p class="muted" style="margin-bottom:14px;">First time here? Enter a display name and create a password to register — your coordinator can verify mentors separately.</p>
+            <p class="muted" style="margin-bottom:14px;">Your coordinator gives you your name and a password directly — there's no self-registration here.</p>
             <div id="mt-error" class="hint" style="display:none;background:var(--danger-tint);color:var(--danger);"></div>
-            <div class="field"><label>Your name</label><input id="mt-name" placeholder="e.g. Sarah K."/></div>
-            <div class="field"><label>Password</label><input id="mt-pw" type="password" onkeydown="if(event.key==='Enter')MHP.mentorAuth('login')"/></div>
-            <div style="display:flex;gap:10px;">
-              <button class="btn-primary" style="flex:1;" id="mt-login-btn" onclick="MHP.mentorAuth('login')">Log in</button>
-              <button class="btn-ghost" style="flex:1;" id="mt-signup-btn" onclick="MHP.mentorAuth('signup')">Register</button>
-            </div>
+            <div class="field"><label>Your name</label><input id="mt-name" placeholder="e.g. Sarah K." onkeydown="if(event.key==='Enter')MHP.mentorAuth()"/></div>
+            <div class="field"><label>Password</label><input id="mt-pw" type="password" onkeydown="if(event.key==='Enter')MHP.mentorAuth()"/></div>
+            <button class="btn-primary" style="width:100%;" id="mt-login-btn" onclick="MHP.mentorAuth()">Log in</button>
           </div>
         </div>
       </div>`;
   }
 
-  MHP.mentorAuth = async function(mode){
-    const name = document.getElementById('mt-name').value.trim();
+  MHP.mentorAuth = async function(){
+    const typedName = document.getElementById('mt-name').value.trim();
     const pw = document.getElementById('mt-pw').value;
     const err = document.getElementById('mt-error');
     err.style.display='none';
-    if(!name || !pw){ err.style.display='block'; err.textContent='Enter a name and password.'; return; }
-    const slug = slugify(name);
+    if(!typedName || !pw){ err.style.display='block'; err.textContent='Enter your name and password.'; return; }
+    S.authBusy = true;
     try{
-      let cred;
-      if(mode==='signup'){
-        cred = await createUserWithEmailAndPassword(auth, mentorEmail(slug), pw);
-        await setDoc(doc(fs,'mentors',cred.user.uid), { name, createdAt: serverTimestamp() });
-        await registerMentorInOrder(cred.user.uid);
-      } else {
-        cred = await signInWithEmailAndPassword(auth, mentorEmail(slug), pw);
-      }
+      const slug = slugify(typedName);
+      const cred = await signInWithEmailAndPassword(auth, mentorEmail(slug), pw);
       const snap = await getDoc(doc(fs,'mentors',cred.user.uid));
-      S.role='mentor'; S.uid=cred.user.uid; S.profile = snap.exists() ? snap.data() : { name };
+      if(!snap.exists()){
+        await signOut(auth);
+        S.authBusy = false;
+        err.style.display='block'; err.textContent='Account found but no profile set up — contact your coordinator.'; return;
+      }
+      S.role='mentor'; S.uid=cred.user.uid; S.profile = snap.data();
       S.view='mentorHome'; S.tab='mentees'; S.activeMenteeUid=null;
+      await checkChatToast();
+      S.authBusy = false;
       render();
     }catch(e){
+      S.authBusy = false;
       err.style.display='block'; err.textContent = friendlyAuthError(e);
     }
   };
@@ -591,13 +1028,20 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
           <div class="tab ${S.tab==='mentees'?'active':''}" onclick="MHP.setTab('mentees')">My mentees</div>
           <div class="tab ${S.tab==='chats'?'active':''}" onclick="MHP.setTab('chats')">Active chats</div>
         </div>
+        <div id="banner-area">${renderBanners()}</div>
         <div class="content" id="mentor-tab-content"><div class="empty">Loading…</div></div>
       </div>`;
+    watchMyNotifications();
     const q = query(collection(fs,'students'), where('mentorId','==',S.uid));
     const unsub = onSnapshot(q, (qs) => {
       const mentees = qs.docs.map(d => ({ uid:d.id, ...d.data() }));
-      if(S.tab==='mentees') renderMentorMenteesTab(mentees);
-      else renderMentorChatsTab(mentees);
+      const pairKeys = mentees.map(u => pairKey(u.uid, S.uid));
+      const unwatch = watchUnread(pairKeys, 'unreadForMentor', (map) => {
+        S.mentorUnreadMap = map;
+        if(S.tab==='mentees') renderMentorMenteesTab(mentees);
+        else renderMentorChatsTab(mentees);
+      });
+      track(unwatch);
     }, (e) => {
       const c = document.getElementById('mentor-tab-content');
       if(c) c.innerHTML = `<div class="empty">Couldn't load mentees (${esc(e.message)}).</div>`;
@@ -608,11 +1052,12 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
   function renderMentorMenteesTab(mentees){
     const c = document.getElementById('mentor-tab-content');
     if(!c) return;
+    const map = S.mentorUnreadMap || {};
     c.innerHTML = mentees.length===0
       ? '<div class="empty card">No mentees assigned yet.</div>'
       : `<div style="max-width:520px;">${mentees.map(u => `
           <div class="mentee-item">
-            <span class="anon-badge">${esc(u.anonName)}</span>
+            <span class="anon-badge">${esc(u.anonName)}${unreadBadge(map[pairKey(u.uid,S.uid)])}</span>
             <button class="btn-ghost" onclick="MHP.openMenteeChat('${u.uid}')">Open chat</button>
           </div>`).join('')}</div>`;
   }
@@ -623,12 +1068,13 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     const c = document.getElementById('mentor-tab-content');
     if(!c) return;
     if(!S.activeMenteeUid && mentees.length>0) S.activeMenteeUid = mentees[0].uid;
+    const map = S.mentorUnreadMap || {};
     c.innerHTML = `
-      <div style="display:flex;gap:18px;">
-        <div style="width:220px;flex-shrink:0;">
+      <div class="mentor-chats-layout">
+        <div class="mentor-chats-sidebar">
           ${mentees.length===0 ? '<p class="muted">No mentees yet.</p>' : mentees.map(u => `
             <div class="mentee-item ${u.uid===S.activeMenteeUid?'active':''}" onclick="MHP.openMenteeChat('${u.uid}')" style="display:block;">
-              <span class="anon-badge" style="font-size:14px;">${esc(u.anonName)}</span>
+              <span class="anon-badge" style="font-size:14px;">${esc(u.anonName)}${unreadBadge(map[pairKey(u.uid,S.uid)])}</span>
             </div>`).join('')}
         </div>
         <div style="flex:1;" id="mentor-chat-panel"></div>
@@ -651,6 +1097,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
         </div>
       </div>`;
     const key = pairKey(u.uid, S.uid);
+    if((S.mentorUnreadMap||{})[key] > 0) markRead(key, 'lastReadByMentor', 'unreadForMentor');
     const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
     const unsub = onSnapshot(q, (qs) => {
       const body = document.getElementById('mentor-chat-body');
@@ -663,6 +1110,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
         </div>`;
       }).join('');
       body.scrollTop = body.scrollHeight;
+      if((S.mentorUnreadMap||{})[key] > 0) markRead(key, 'lastReadByMentor', 'unreadForMentor');
     });
     track(unsub);
   }
@@ -675,6 +1123,7 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     const key = pairKey(menteeUid, S.uid);
     try{
       await addDoc(collection(fs,'messages',key,'thread'), { from:'mentor', text, ts: serverTimestamp() });
+      await bumpLastMessage(key, 'lastReadByMentor', 'unreadForMentor', 'unreadForStudent');
     }catch(e){ alert('Message failed to send: ' + e.message); }
   };
 
@@ -701,16 +1150,20 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     const err = document.getElementById('ad-error');
     err.style.display='none';
     if(!user || !pw){ err.style.display='block'; err.textContent='Enter both fields.'; return; }
+    S.authBusy = true;
     try{
       const cred = await signInWithEmailAndPassword(auth, user, pw);
       if(cred.user.email !== ADMIN_EMAIL){
         await signOut(auth);
+        S.authBusy = false;
         err.style.display='block'; err.textContent='This account is not authorized for management access.'; return;
       }
       S.role='admin'; S.uid=cred.user.uid; S.profile={ email:cred.user.email };
-      S.view='adminHome'; S.adminTab='users';
+      S.view='adminHome'; S.adminTab='students';
+      S.authBusy = false;
       render();
     }catch(e){
+      S.authBusy = false;
       err.style.display='block'; err.textContent = friendlyAuthError(e);
     }
   };
@@ -721,18 +1174,29 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
       <div class="shell">
         ${topbar('Program management', 'MHP.logout()')}
         <div class="tabs">
-          <div class="tab ${S.adminTab==='users'?'active':''}" onclick="MHP.setAdminTab('users')">Signed-up students</div>
+          <div class="tab ${S.adminTab==='students'?'active':''}" onclick="MHP.setAdminTab('students')">Students</div>
+          <div class="tab ${S.adminTab==='mentors'?'active':''}" onclick="MHP.setAdminTab('mentors')">Mentors</div>
           <div class="tab ${S.adminTab==='chats'?'active':''}" onclick="MHP.setAdminTab('chats')">Mentor chats</div>
           <div class="tab ${S.adminTab==='issues'?'active':''}" onclick="MHP.setAdminTab('issues')">Reported issues</div>
+          <div class="tab ${S.adminTab==='notifications'?'active':''}" onclick="MHP.setAdminTab('notifications')">Notifications</div>
         </div>
         <div class="content" id="admin-tab-content"><div class="empty">Loading…</div></div>
       </div>`;
-    if(S.adminTab==='users') renderAdminUsers();
+    if(S.adminTab==='students') renderAdminStudents();
+    else if(S.adminTab==='mentors') renderAdminMentors();
     else if(S.adminTab==='chats') renderAdminChats();
+    else if(S.adminTab==='notifications') renderAdminNotifications();
     else renderAdminIssues();
   }
 
-  function renderAdminUsers(){
+  function parseLines(text){ return [...new Set(text.split('\n').map(l=>l.trim()).filter(Boolean))]; }
+  function mergeUnique(existing, incoming){
+    const merged = [...existing];
+    incoming.forEach(v => { if(!merged.some(m => String(m).toUpperCase() === v.toUpperCase())) merged.push(v); });
+    return merged;
+  }
+
+  function renderAdminStudents(){
     const c = document.getElementById('admin-tab-content');
     const unsubMentors = onSnapshot(collection(fs,'mentors'), (mSnap) => {
       const mentorNames = {};
@@ -741,17 +1205,34 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
         if(!c) return;
         const rows = qs.docs.map(d => ({ uid:d.id, ...d.data() }));
         c.innerHTML = `
+          <div class="card" style="margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="MHP.toggleAddStudents()">
+              <h3 style="margin:0;">Add students to the whitelist</h3>
+              <span class="muted">${S.showAddStudents ? 'Hide' : 'Show'}</span>
+            </div>
+            ${S.showAddStudents ? `
+              <div style="margin-top:14px;">
+                <div id="add-students-err"></div>
+                <div class="two-col-form">
+                  <div class="field"><label>Boys' school IDs (one per line)</label><textarea id="add-boys-ids" rows="4" placeholder="S1001&#10;S1002"></textarea></div>
+                  <div class="field"><label>Girls' school IDs (one per line)</label><textarea id="add-girls-ids" rows="4" placeholder="S2001&#10;S2002"></textarea></div>
+                </div>
+                <button class="btn-primary" id="add-students-btn" onclick="MHP.saveNewStudentIds()">Add to whitelist</button>
+              </div>` : ''}
+          </div>
           <div class="hint">Passwords are handled by Firebase Authentication and are never visible here — even to you. That's intentional and keeps every account secure.</div>
           <div class="card" style="overflow-x:auto;">
             <table>
-              <thead><tr><th>School ID</th><th>Anonymous name</th><th>Mentor</th><th>Joined</th></tr></thead>
+              <thead><tr><th>School ID</th><th>Gender</th><th>Anonymous name</th><th>Mentor</th><th>Joined</th><th></th></tr></thead>
               <tbody>
-                ${rows.length===0 ? '<tr><td colspan="4" class="muted">No sign-ups yet.</td></tr>' : rows.map(u => `
+                ${rows.length===0 ? '<tr><td colspan="6" class="muted">No sign-ups yet.</td></tr>' : rows.map(u => `
                   <tr>
                     <td>${esc(u.schoolId)}</td>
+                    <td class="muted" style="text-transform:capitalize;">${esc(u.gender || '—')}</td>
                     <td class="anon-badge" style="font-size:14px;">${esc(u.anonName)}</td>
                     <td>${u.mentorId ? esc(mentorNames[u.mentorId] || 'Unknown') : '<span class="muted">unassigned</span>'}</td>
                     <td class="muted">${fmtTime(u.createdAt)}</td>
+                    <td><button class="btn-ghost" style="padding:5px 10px;font-size:12.5px;" onclick="MHP.deleteStudent('${u.uid}','${esc(u.anonName)}')">Delete</button></td>
                   </tr>`).join('')}
               </tbody>
             </table>
@@ -761,6 +1242,195 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     });
     track(unsubMentors);
   }
+
+  MHP.toggleAddStudents = function(){ S.showAddStudents = !S.showAddStudents; renderAdminStudents(); };
+
+  MHP.saveNewStudentIds = async function(){
+    const boysNew = parseLines(document.getElementById('add-boys-ids').value).map(x=>x.toUpperCase());
+    const girlsNew = parseLines(document.getElementById('add-girls-ids').value).map(x=>x.toUpperCase());
+    const errBox = document.getElementById('add-students-err');
+    const btn = document.getElementById('add-students-btn');
+    errBox.innerHTML = '';
+    if(boysNew.length===0 && girlsNew.length===0){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Paste at least one ID first.</div>'; return; }
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try{
+      const snap = await getDoc(doc(fs,'meta','whitelist'));
+      const existing = snap.exists() ? snap.data() : {};
+      const mergedBoys = mergeUnique(existing.boys || [], boysNew);
+      const mergedGirls = mergeUnique(existing.girls || [], girlsNew);
+      await setDoc(doc(fs,'meta','whitelist'), { boys: mergedBoys, girls: mergedGirls });
+      S.showAddStudents = false;
+      renderAdminStudents();
+    }catch(e){
+      errBox.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">${esc(e.message)}</div>`;
+      btn.disabled=false; btn.textContent='Add to whitelist';
+    }
+  };
+
+  MHP.deleteStudent = async function(uid, anonName){
+    if(!confirm(`Remove ${anonName}'s profile? Their chat history stays in the database but becomes inaccessible. Their login itself isn't deleted — remove it separately in Authentication → Users if you want it fully gone.`)) return;
+    try{ await deleteDoc(doc(fs,'students',uid)); }
+    catch(e){ alert('Could not delete: ' + e.message); }
+  };
+
+  // ---------- ADMIN: MENTORS ----------
+  function renderAdminMentors(){
+    const c = document.getElementById('admin-tab-content');
+    const unsub = onSnapshot(collection(fs,'mentors'), (qs) => {
+      if(!c) return;
+      const rows = qs.docs.map(d => ({ uid:d.id, ...d.data() }));
+      c.innerHTML = `
+        <div class="card" style="margin-bottom:18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="MHP.toggleAddMentor()">
+            <h3 style="margin:0;">Add a mentor</h3>
+            <span class="muted">${S.showAddMentor ? 'Hide' : 'Show'}</span>
+          </div>
+          ${S.showAddMentor ? `
+            <div style="margin-top:14px;max-width:420px;">
+              <div id="add-mentor-err"></div>
+              <div class="field"><label>Name</label><input id="new-mentor-name" placeholder="e.g. Sarah K."/></div>
+              <div class="field"><label>Gender</label>
+                <select id="new-mentor-gender" style="width:100%;padding:11px 13px;border-radius:9px;border:1px solid var(--border);">
+                  <option value="boy">Boy mentors' pool (matches boy students)</option>
+                  <option value="girl">Girl mentors' pool (matches girl students)</option>
+                </select>
+              </div>
+              <div class="field"><label>Password (you choose this — hand it to the mentor yourself)</label><input id="new-mentor-pw" type="text" placeholder="At least 6 characters"/></div>
+              <button class="btn-primary" id="add-mentor-btn" onclick="MHP.createMentorFromAdmin()">Create account</button>
+              <div id="new-mentor-result"></div>
+            </div>` : ''}
+        </div>
+        <div class="card" style="overflow-x:auto;">
+          <table>
+            <thead><tr><th>Name</th><th>Gender</th><th>Current mentees</th><th>Joined</th><th></th></tr></thead>
+            <tbody>
+              ${rows.length===0 ? '<tr><td colspan="5" class="muted">No mentors yet.</td></tr>' : rows.map(m => `
+                <tr>
+                  <td>${esc(m.name)}</td>
+                  <td class="muted" style="text-transform:capitalize;">${esc(m.gender || '—')}</td>
+                  <td>${m.menteeCount ?? 0}</td>
+                  <td class="muted">${fmtTime(m.createdAt)}</td>
+                  <td style="white-space:nowrap;">
+                    <button class="btn-ghost" style="padding:5px 10px;font-size:12.5px;" onclick="MHP.resetMentorPassword('${m.uid}','${esc(m.name)}','${esc(m.gender||'boy')}')">Reset password</button>
+                    <button class="btn-ghost" style="padding:5px 10px;font-size:12.5px;" onclick="MHP.deleteMentor('${m.uid}','${esc(m.name)}')">Delete</button>
+                  </td>
+                </tr>
+                <tr id="reset-row-${m.uid}" style="display:none;"><td colspan="5"><div id="reset-box-${m.uid}"></div></td></tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load mentors (${esc(e.message)}).</div>`; });
+    track(unsub);
+  }
+
+  MHP.toggleAddMentor = function(){ S.showAddMentor = !S.showAddMentor; renderAdminMentors(); };
+
+  MHP.createMentorFromAdmin = async function(){
+    const name = document.getElementById('new-mentor-name').value.trim();
+    const gender = document.getElementById('new-mentor-gender').value;
+    const password = document.getElementById('new-mentor-pw').value;
+    const errBox = document.getElementById('add-mentor-err');
+    const resultBox = document.getElementById('new-mentor-result');
+    const btn = document.getElementById('add-mentor-btn');
+    errBox.innerHTML = ''; resultBox.innerHTML = '';
+    if(!name){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Enter a name.</div>'; return; }
+    if(!password || password.length < 6){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Enter a password of at least 6 characters.</div>'; return; }
+    btn.disabled = true; btn.textContent = 'Creating…';
+    const slug = slugify(name);
+    const email = mentorEmail(slug);
+    // Throwaway secondary app instance so this doesn't sign the admin out of their own session.
+    const secondary = initializeApp(firebaseConfig, 'creator-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    const secondaryAuth = getAuth(secondary);
+    try{
+      const cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
+      await setDoc(doc(fs,'mentors',cred.user.uid), { name, gender, menteeCount: 0, createdAt: serverTimestamp() });
+      await signOut(secondaryAuth).catch(()=>{});
+      await deleteApp(secondary).catch(()=>{});
+      resultBox.innerHTML = `<div class="hint">Created. ${esc(name)} can now log in with the name and password you just set.</div>`;
+      document.getElementById('new-mentor-name').value = '';
+      document.getElementById('new-mentor-pw').value = '';
+      btn.disabled=false; btn.textContent='Create account';
+    }catch(e){
+      await deleteApp(secondary).catch(()=>{});
+      errBox.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">${esc(e.message)}</div>`;
+      btn.disabled=false; btn.textContent='Create account';
+    }
+  };
+
+  // Resetting another user's password can't be done purely client-side (no backend/Admin SDK here),
+  // so this is a two-step dance: free up their login in the Firebase console, then recreate it here
+  // with the password you choose — their existing mentees are automatically re-pointed, nothing else changes.
+  MHP.resetMentorPassword = function(uid, name, gender){
+    const row = document.getElementById('reset-row-'+uid);
+    const box = document.getElementById('reset-box-'+uid);
+    row.style.display = 'table-row';
+    box.innerHTML = `
+      <div class="hint" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label style="margin-bottom:4px;">New password for ${esc(name)}</label>
+          <input id="reset-pw-${uid}" type="text" placeholder="At least 6 characters"/>
+        </div>
+        <button class="btn-primary" onclick="MHP.confirmResetMentorPassword('${uid}','${esc(name)}','${esc(gender)}')">Confirm</button>
+        <button class="btn-ghost" onclick="document.getElementById('reset-row-${uid}').style.display='none';">Cancel</button>
+      </div>`;
+  };
+
+  MHP.confirmResetMentorPassword = async function(uid, name, gender){
+    const box = document.getElementById('reset-box-'+uid);
+    const password = document.getElementById('reset-pw-'+uid).value;
+    if(!password || password.length < 6){
+      box.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Enter a password of at least 6 characters.</div>`;
+      return;
+    }
+    box.innerHTML = `<div class="hint">Working…</div>`;
+    try{
+      const menteesSnap = await getDocs(query(collection(fs,'students'), where('mentorId','==',uid)));
+      const menteeUids = menteesSnap.docs.map(d => d.id);
+      const slug = slugify(name);
+      const email = mentorEmail(slug);
+      const secondary = initializeApp(firebaseConfig, 'reset-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+      const secondaryAuth = getAuth(secondary);
+      try{
+        const cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
+        // Succeeded — the old login must already be gone. Finish the swap.
+        await setDoc(doc(fs,'mentors',cred.user.uid), { name, gender, menteeCount: menteeUids.length, createdAt: serverTimestamp() });
+        await deleteDoc(doc(fs,'mentors',uid));
+        for(const menteeUid of menteeUids){
+          await updateDoc(doc(fs,'students',menteeUid), { mentorId: cred.user.uid });
+        }
+        await signOut(secondaryAuth).catch(()=>{});
+        await deleteApp(secondary).catch(()=>{});
+        box.innerHTML = `<div class="hint">Done. ${esc(name)} can now log in with the new password you set. Their ${menteeUids.length} mentee(s) stayed assigned to them.</div>`;
+      }catch(e){
+        await deleteApp(secondary).catch(()=>{});
+        if(e.code && e.code.includes('email-already-in-use')){
+          box.innerHTML = `<div class="hint">
+            One manual step needed first: go to Firebase Console → Authentication → Users, find
+            <strong>${esc(email)}</strong>, and delete that account — that's ${esc(name)}'s current login, and it has to
+            be freed up before a new password can be issued. Nothing here has been changed yet.<br><br>
+            Once you've deleted it there, click Reset password again for ${esc(name)} to finish.
+          </div>`;
+        } else {
+          box.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">${esc(e.message)}</div>`;
+        }
+      }
+    }catch(e){
+      box.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">${esc(e.message)}</div>`;
+    }
+  };
+
+  MHP.deleteMentor = async function(uid, name){
+    if(!confirm(`Remove ${name}? Any current mentees will be automatically reassigned to another mentor of the same gender, or marked as waiting if none are available.`)) return;
+    try{
+      const menteesSnap = await getDocs(query(collection(fs,'students'), where('mentorId','==',uid)));
+      const mentees = menteesSnap.docs.map(d => ({ uid:d.id, ...d.data() }));
+      await deleteDoc(doc(fs,'mentors',uid));
+      for(const mentee of mentees){
+        const newMentor = await assignLeastLoadedMentor(mentee.gender);
+        await updateDoc(doc(fs,'students',mentee.uid), { mentorId: newMentor || null });
+      }
+    }catch(e){ alert('Could not delete: ' + e.message); }
+  };
 
   function renderAdminChats(){
     const c = document.getElementById('admin-tab-content');
@@ -774,21 +1444,13 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
           if(!c) return;
           const mentees = activeMentorUid ? sSnap.docs.map(d => ({ uid:d.id, ...d.data() })) : [];
           if(!S.adminActiveMentee && mentees.length>0) S.adminActiveMentee = mentees[0].uid;
-          c.innerHTML = `
-            <div style="display:flex;gap:18px;">
-              <div style="width:190px;flex-shrink:0;">
-                <p class="muted" style="margin-bottom:8px;">Mentors</p>
-                ${mentors.length===0 ? '<p class="muted">None registered.</p>' : mentors.map(m => `
-                  <div class="mentee-item ${m.uid===activeMentorUid?'active':''}" style="display:block;" onclick="MHP.setAdminMentor('${m.uid}')">${esc(m.name)}</div>`).join('')}
-              </div>
-              <div style="width:190px;flex-shrink:0;">
-                <p class="muted" style="margin-bottom:8px;">Mentees</p>
-                ${mentees.length===0 ? '<p class="muted">None.</p>' : mentees.map(u => `
-                  <div class="mentee-item ${u.uid===S.adminActiveMentee?'active':''}" style="display:block;" onclick="MHP.setAdminMentee('${u.uid}')"><span class="anon-badge" style="font-size:13.5px;">${esc(u.anonName)}</span></div>`).join('')}
-              </div>
-              <div style="flex:1;" id="admin-chat-panel"></div>
-            </div>`;
-          renderAdminChatPanel(activeMentorUid, mentors.find(m=>m.uid===activeMentorUid), mentees.find(u=>u.uid===S.adminActiveMentee));
+          const pairKeys = activeMentorUid ? mentees.map(u => pairKey(u.uid, activeMentorUid)) : [];
+          const unwatch = watchUnread(pairKeys, 'unreadForMentor', (map) => {
+            S.adminUnreadMap = map;
+            paintAdminChatsList(mentors, activeMentorUid, mentees);
+          });
+          track(unwatch);
+          paintAdminChatsList(mentors, activeMentorUid, mentees);
         }, (e) => { if(c) c.innerHTML = `<div class="empty">Couldn't load mentees (${esc(e.message)}).</div>`; }
       );
       track(unsubStudents);
@@ -796,11 +1458,32 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     track(unsub);
   }
 
+  function paintAdminChatsList(mentors, activeMentorUid, mentees){
+    const c = document.getElementById('admin-tab-content');
+    if(!c) return;
+    const map = S.adminUnreadMap || {};
+    c.innerHTML = `
+      <div class="admin-chats-layout">
+        <div class="admin-chats-col">
+          <p class="muted" style="margin-bottom:8px;">Mentors</p>
+          ${mentors.length===0 ? '<p class="muted">None registered.</p>' : mentors.map(m => `
+            <div class="mentee-item ${m.uid===activeMentorUid?'active':''}" style="display:block;" onclick="MHP.setAdminMentor('${m.uid}')">${esc(m.name)}</div>`).join('')}
+        </div>
+        <div class="admin-chats-col">
+          <p class="muted" style="margin-bottom:8px;">Mentees</p>
+          ${mentees.length===0 ? '<p class="muted">None.</p>' : mentees.map(u => `
+            <div class="mentee-item ${u.uid===S.adminActiveMentee?'active':''}" style="display:block;" onclick="MHP.setAdminMentee('${u.uid}')"><span class="anon-badge" style="font-size:13.5px;">${esc(u.anonName)}${unreadBadge(map[pairKey(u.uid,activeMentorUid)])}</span></div>`).join('')}
+        </div>
+        <div style="flex:1;min-width:0;" id="admin-chat-panel"></div>
+      </div>`;
+    renderAdminChatPanel(activeMentorUid, mentors.find(m=>m.uid===activeMentorUid), mentees.find(u=>u.uid===S.adminActiveMentee));
+  }
+
   function renderAdminChatPanel(mentorUid, mentor, mentee){
     const panel = document.getElementById('admin-chat-panel');
     if(!panel) return;
     if(!mentorUid || !mentor || !mentee){ panel.innerHTML = '<div class="empty card">Select a mentor and mentee to view the conversation.</div>'; return; }
-    panel.innerHTML = `<div class="chat-panel"><div class="chat-header"><strong>${esc(mentor.name)} ↔ <span class="anon-badge" style="font-size:15px;">${esc(mentee.anonName)}</span></strong></div><div class="chat-body" id="admin-chat-body"><div class="empty">Loading…</div></div></div><p class="muted" style="margin-top:8px;">Read-only view for oversight.</p>`;
+    panel.innerHTML = `<div class="chat-panel"><div class="chat-header"><strong>${esc(mentor.name)} ↔ <span class="anon-badge" style="font-size:15px;">${esc(mentee.anonName)}</span></strong></div><div class="chat-body" id="admin-chat-body"><div class="empty">Loading…</div></div></div><p class="muted" style="margin-top:8px;">Read-only view for oversight. The dot next to a mentee's name means the mentor hasn't opened that chat since the last message.</p>`;
     const key = pairKey(mentee.uid, mentorUid);
     const q = query(collection(fs,'messages',key,'thread'), orderBy('ts','asc'));
     const unsub = onSnapshot(q, (qs) => {
@@ -849,8 +1532,91 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     catch(e){ alert('Could not update: ' + e.message); }
   };
 
+  // ---------- ADMIN: NOTIFICATIONS ----------
+  function renderAdminNotifications(){
+    const unsubS = onSnapshot(collection(fs,'students'), (sSnap) => {
+      const students = sSnap.docs.map(d => ({ uid:d.id, ...d.data() }));
+      const unsubM = onSnapshot(collection(fs,'mentors'), (mSnap) => {
+        const mentors = mSnap.docs.map(d => ({ uid:d.id, ...d.data() }));
+        paintAdminNotifications(students, mentors);
+      });
+      track(unsubM);
+    });
+    track(unsubS);
+  }
+
+  function paintAdminNotifications(students, mentors){
+    const c = document.getElementById('admin-tab-content');
+    if(!c) return;
+    c.innerHTML = `
+      <div class="card" style="max-width:680px;">
+        <h3>Send a notification</h3>
+        <p class="muted">Shows up as a dismissible banner for whoever you select, the next time they're on the platform.</p>
+        <div class="field"><textarea id="notif-text" rows="3" placeholder="Write your message…"></textarea></div>
+        <div id="notif-err"></div>
+        <div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+          <button class="btn-ghost" onclick="MHP.toggleAllNotifCheckboxes('student',true)">Select all students</button>
+          <button class="btn-ghost" onclick="MHP.toggleAllNotifCheckboxes('mentor',true)">Select all mentors</button>
+          <button class="btn-ghost" onclick="MHP.toggleAllNotifCheckboxes('all',false)">Clear all</button>
+        </div>
+        <div class="two-col-form" style="max-height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:12px;">
+          <div>
+            <p class="muted" style="margin-bottom:6px;font-weight:600;">Students (${students.length})</p>
+            ${students.length===0 ? '<p class="muted">None yet.</p>' : students.map(u => `<label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0;"><input type="checkbox" class="notif-cb notif-cb-student" value="${u.uid}"/> ${esc(u.anonName)}</label>`).join('')}
+          </div>
+          <div>
+            <p class="muted" style="margin-bottom:6px;font-weight:600;">Mentors (${mentors.length})</p>
+            ${mentors.length===0 ? '<p class="muted">None yet.</p>' : mentors.map(m => `<label style="display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0;"><input type="checkbox" class="notif-cb notif-cb-mentor" value="${m.uid}"/> ${esc(m.name)}</label>`).join('')}
+          </div>
+        </div>
+        <button class="btn-primary" style="margin-top:14px;" id="send-notif-btn" onclick="MHP.sendNotification()">Send notification</button>
+      </div>
+      <div style="max-width:680px;">
+        <h3 style="font-size:15px;">Recently sent</h3>
+        <div id="notif-history"><p class="muted">Loading…</p></div>
+      </div>`;
+    const unsub = onSnapshot(collection(fs,'notifications'), (qs) => {
+      const hist = document.getElementById('notif-history');
+      if(!hist) return;
+      const items = qs.docs.map(d => ({ id:d.id, ...d.data() }))
+        .sort((a,b) => (b.createdAt?.toMillis?.()||0) - (a.createdAt?.toMillis?.()||0)).slice(0,15);
+      hist.innerHTML = items.length===0 ? '<p class="muted">None yet.</p>' : items.map(n => `
+        <div class="card" style="margin-bottom:8px;padding:14px;">
+          <div style="margin-bottom:4px;">${esc(n.text)}</div>
+          <div class="muted">${fmtTime(n.createdAt)} · sent to ${n.targetUids ? n.targetUids.length : 0} recipient(s)</div>
+        </div>`).join('');
+    }, (e) => { const hist=document.getElementById('notif-history'); if(hist) hist.innerHTML = `<p class="muted">Couldn't load history (${esc(e.message)}).</p>`; });
+    track(unsub);
+  }
+
+  MHP.toggleAllNotifCheckboxes = function(type, checked){
+    const selector = type==='student' ? '.notif-cb-student' : type==='mentor' ? '.notif-cb-mentor' : '.notif-cb';
+    document.querySelectorAll(selector).forEach(cb => { cb.checked = checked; });
+  };
+
+  MHP.sendNotification = async function(){
+    const text = document.getElementById('notif-text').value.trim();
+    const errBox = document.getElementById('notif-err');
+    const btn = document.getElementById('send-notif-btn');
+    errBox.innerHTML = '';
+    const targetUids = Array.from(document.querySelectorAll('.notif-cb:checked')).map(cb => cb.value);
+    if(!text){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Write a message first.</div>'; return; }
+    if(targetUids.length===0){ errBox.innerHTML = '<div class="hint" style="background:var(--danger-tint);color:var(--danger);">Select at least one recipient.</div>'; return; }
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try{
+      await addDoc(collection(fs,'notifications'), { text, targetUids, createdAt: serverTimestamp(), createdBy: S.uid });
+      document.getElementById('notif-text').value = '';
+      document.querySelectorAll('.notif-cb').forEach(cb => { cb.checked = false; });
+      btn.disabled=false; btn.textContent='Send notification';
+    }catch(e){
+      errBox.innerHTML = `<div class="hint" style="background:var(--danger-tint);color:var(--danger);">${esc(e.message)}</div>`;
+      btn.disabled=false; btn.textContent='Send notification';
+    }
+  };
+
   // ---------- shared nav ----------
   MHP.go = function(view){ S.view = view; render(); };
+  MHP.enterStudentApp = function(){ S.view='studentMain'; S.tab='info'; render(); };
   MHP.setTab = function(tab){ S.tab = tab; render(); };
   MHP.setAdminTab = function(tab){ S.adminTab = tab; render(); };
   MHP.logout = async function(){
@@ -872,15 +1638,17 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
     S.authBusy = true;
     try{
       if(user.email === ADMIN_EMAIL){
-        S.role='admin'; S.uid=user.uid; S.profile={ email:user.email }; S.view='adminHome'; S.adminTab='users';
+        S.role='admin'; S.uid=user.uid; S.profile={ email:user.email }; S.view='adminHome'; S.adminTab='students';
       } else {
         const sSnap = await getDoc(doc(fs,'students',user.uid));
         if(sSnap.exists()){
           S.role='student'; S.uid=user.uid; S.profile=sSnap.data(); S.view='studentMain'; S.tab='chat';
+          await checkChatToast();
         } else {
           const mSnap = await getDoc(doc(fs,'mentors',user.uid));
           if(mSnap.exists()){
             S.role='mentor'; S.uid=user.uid; S.profile=mSnap.data(); S.view='mentorHome'; S.tab='mentees';
+            await checkChatToast();
           } else {
             // Not admin, no student doc, no mentor doc: an interrupted signup. Sign out and let them retry cleanly.
             await signOut(auth); S.view='landing';
@@ -897,3 +1665,5 @@ const ADMIN_EMAIL = "admin@mhmp-peer-mentorship.local";
   render(); // shows the boot spinner until onAuthStateChanged fires
 })();
 </script>
+</body>
+</html>
