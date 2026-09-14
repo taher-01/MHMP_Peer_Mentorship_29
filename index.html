@@ -94,8 +94,10 @@
   #mhp-root .pill-resolved{background:var(--primary-tint);color:var(--primary-dark);}
   #mhp-root .topbar{
     display:flex;align-items:center;justify-content:space-between;
-    padding:14px 24px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.85);
-    backdrop-filter:blur(8px);position:sticky;top:0;z-index:10;
+    padding:13px 22px;margin:14px 18px 12px;border-radius:18px;
+    border:1px solid var(--border);background:rgba(255,255,255,.78);
+    backdrop-filter:blur(10px);box-shadow:var(--shadow-md);
+    position:sticky;top:14px;z-index:10;
   }
   #mhp-root .topbar .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;}
   #mhp-root .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(246,169,60,.22);}
@@ -212,7 +214,7 @@
     #mhp-root .mentor-chats-sidebar,
     #mhp-root .admin-chats-col{width:100%;}
     #mhp-root .two-col-form{grid-template-columns:1fr;}
-    #mhp-root .topbar{padding:12px 16px;flex-wrap:wrap;row-gap:8px;}
+    #mhp-root .topbar{padding:11px 16px;margin:10px 10px 10px;border-radius:15px;top:10px;flex-wrap:wrap;row-gap:8px;}
     #mhp-root .topbar .brand{font-size:17px;}
     #mhp-root .tabs{padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
     #mhp-root .tab{margin-right:16px;padding:12px 4px;white-space:nowrap;font-size:13.5px;}
@@ -728,7 +730,6 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
     { id:'info-mission', label:'Mission & Vision' },
     { id:'info-approach', label:'Approach' },
     { id:'info-training', label:'Training' },
-    { id:'info-selection', label:'Selection' },
   ];
 
   function renderStudentInfoTab(p){
@@ -772,26 +773,6 @@ const WHATSAPP_LINK = "https://chat.whatsapp.com/REPLACE-ME";
         ${infoSection('Our approach', 'Why this approach', 'Before building the program, we ran a survey to understand the mental health challenges STEM students actually face — things like homesickness, burnout, imposter syndrome, and pressure around academic identity. That research shaped the training curriculum every mentor goes through.', ICON_CHART, {id:'info-approach', reverse:true})}
 
         ${infoSection('Training', 'Who trains our mentors', 'Every mentor is trained and supervised by experienced mental health professionals — clinicians and researchers holding credentials including MSc and PhD-level clinical psychology, and specialized training in psychotherapy and mental health.', ICON_BADGE, {id:'info-training'})}
-
-        <div class="info-block" id="info-selection">
-          <div class="info-block-inner" style="text-align:center;">
-            <span class="info-kicker">Selection</span>
-            <h2>${splitWords('How mentors are chosen')}</h2>
-            <p style="max-width:520px;margin:0 auto;">A two-stage process, so only the most committed candidates move forward.</p>
-            <div class="info-process">
-              <div class="info-process-step">
-                <div class="info-process-circle">1</div>
-                <div class="info-process-label">Application<br/>& interview</div>
-              </div>
-              <div class="info-process-line"></div>
-              <div class="info-process-step">
-                <div class="info-process-circle">2</div>
-                <div class="info-process-label">Assessed during<br/>training</div>
-              </div>
-            </div>
-            <p class="muted" style="margin-top:22px;">Trainers assess attendance, engagement, and commitment throughout training — only mentors who perform well move forward. We look for fairness, discretion, and active listening above all.</p>
-          </div>
-        </div>
 
         <div class="info-cta">
           <h2>Ready to talk to someone?</h2>
