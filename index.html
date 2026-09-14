@@ -53,7 +53,7 @@
     margin:0 0 6px 0;
     letter-spacing:-0.015em;
   }
-  #mhp-root .shell{max-width:1080px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;animation:mhpfadein .35s ease;}
+  #mhp-root .shell{width:100%;flex:1;display:flex;flex-direction:column;animation:mhpfadein .35s ease;}
   @keyframes mhpfadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
   #mhp-root button{
     font-family:'Inter',sans-serif;
@@ -94,7 +94,8 @@
   #mhp-root .pill-resolved{background:var(--primary-tint);color:var(--primary-dark);}
   #mhp-root .topbar{
     display:flex;align-items:center;justify-content:space-between;
-    padding:13px 22px;margin:14px 18px 12px;border-radius:18px;
+    padding:13px 22px;margin:14px auto 12px;border-radius:18px;
+    max-width:1600px;width:calc(100% - 36px);
     border:1px solid var(--border);background:rgba(255,255,255,.78);
     backdrop-filter:blur(10px);box-shadow:var(--shadow-md);
     position:sticky;top:14px;z-index:10;
@@ -105,7 +106,7 @@
   #mhp-root .tab{padding:14px 6px;margin-right:22px;font-weight:600;font-size:14px;color:var(--ink-soft);border-bottom:2px solid transparent;cursor:pointer;transition:color .15s ease, border-color .15s ease;}
   #mhp-root .tab:hover{color:var(--primary-dark);}
   #mhp-root .tab.active{color:var(--primary-dark);border-bottom-color:var(--primary);}
-  #mhp-root .content{flex:1;padding:26px 24px;display:flex;flex-direction:column;}
+  #mhp-root .content{flex:1;padding:26px 24px;display:flex;flex-direction:column;max-width:1240px;margin:0 auto;width:100%;}
   #mhp-root .centerbox{max-width:420px;margin:48px auto;width:100%;}
   #mhp-root .msg-row{display:flex;margin-bottom:9px;}
   #mhp-root .msg-row.me{justify-content:flex-end;}
@@ -214,7 +215,7 @@
     #mhp-root .mentor-chats-sidebar,
     #mhp-root .admin-chats-col{width:100%;}
     #mhp-root .two-col-form{grid-template-columns:1fr;}
-    #mhp-root .topbar{padding:11px 16px;margin:10px 10px 10px;border-radius:15px;top:10px;flex-wrap:wrap;row-gap:8px;}
+    #mhp-root .topbar{padding:11px 16px;margin:10px 10px 10px;width:calc(100% - 20px);border-radius:15px;top:10px;flex-wrap:wrap;row-gap:8px;}
     #mhp-root .topbar .brand{font-size:17px;}
     #mhp-root .tabs{padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
     #mhp-root .tab{margin-right:16px;padding:12px 4px;white-space:nowrap;font-size:13.5px;}
